@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Eventos DOM</title>
+    <style>
+        div#area {
+            color: white;
+            background-color: rgb(1, 156, 156);
+            width: 200px;
+            height: 200px;
+            line-height: 200px;
+            text-align: center;
+            font-size: 20pt;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        div#passar {
+            margin-top: 20px;
+            color: white;
+            background-color: rgb(1, 156, 156);
+            width: 200px;
+            height: 200px;
+            line-height: 200px;
+            text-align: center;
+            font-size: 15pt;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        div#truque {
+            margin-top: 20px;
+            color: white;
+            background-color: rgb(1, 156, 156);
+            width: 200px;
+            height: 200px;
+            line-height: 200px;
+            text-align: center;
+            font-size: 15pt;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+    </style>
+</head>
+<body>
+
+    <div id="area" onclick="clicarr()">
+        Interaja...
+    </div>
+
+    <div id="passar" onmousemove="passar()">
+        Passa o mouse
+    </div>
+
+    <div id="truque" onclick="clicar()" onmouseenter="entrar()" onmouseout="sair()">
+        Interaja denovo
+    </div>
+
+    <script>
+
+        function clicarr(){
+            var area = document.getElementById('area')
+            area.innerText = 'Clicou né safado'
+            area.style.background = 'yellow'
+            area.style.color = 'Black'
+        }
+
+        function passar() {
+            var passar = document.getElementById('passar')
+            passar.innerText = 'Pega a transition'
+            passar.style.background = 'purple'
+        }
+
+        var c = document.getElementById('truque')
+        function clicar() {
+            c.innerText = 'Clicou'
+            c.style.background = 'blue'
+        }
+
+        function entrar() {
+            c.innerText = 'Entrou'
+            c.style.background = 'green'
+        }
+
+        function sair() {
+            c.innerText = 'Saiu'
+            c.style.background = 'red'
+        }
+
+    </script>
+</body>
+</html>

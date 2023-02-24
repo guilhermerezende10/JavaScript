@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Somando números</title>
+    <style>
+        body {
+            background-image: linear-gradient(rgb(132, 0, 255), blue);
+            height: 96vh;
+            background-repeat: no-repeat;
+            font-family: Arial, Helvetica, sans-serif;
+            color: white;
+        }
+
+        h1 {
+            text-align: center;
+            text-shadow: 2px 2px 2px black;
+        }
+
+        input {
+            
+            width: 50%;
+            padding: 10px;
+            border-radius: 5px;
+            text-decoration: none;
+            text-align: center;
+            justify-content: center;
+            display: flexbox;
+            width: 150px;
+            
+
+        }
+
+        input#btn {
+            color: white;
+            background-color: rgb(111, 39, 194);
+            text-shadow: 1px 1px 1px black;
+            border: none;
+            box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.5);
+
+        }
+
+        input.caixa {
+            margin-left: 0px;
+            margin-bottom: 5px;
+        }
+
+        div {
+            width: 75px;
+            padding: 10px 10px 10px 10px;
+            margin-top: 10px;
+            text-align: center;
+            
+        }
+
+        div#res {
+            background-color: darkred;
+            text-shadow: 1px 1px 1px black;
+            margin-left: 45%;
+
+        }
+
+        
+
+
+    </style>
+</head>
+<body>
+    <h1>Somando valores</h1>
+    <input type="number" name="txtn1" id="txtn1" class="caixa">
+    <input type="number" name="txtn2" id="txtn2" class="caixa">
+    <input type="button" value="Somar" onclick="somar()" id="btn">
+    <div id="res">Resultado</div>
+
+    <script>
+        function somar() {
+            var tn1 = document.getElementById('txtn1')
+            var tn2 = document.getElementById('txtn2')
+            var res = document.getElementById('res')
+            var n1 = Number(tn1.value)
+            var n2 = Number(tn2.value)
+            var s = n1 + n2
+            res.innerHTML = `${n1} + ${n2} = ${s}`
+        }
+    </script>
+</body>
+</html>
