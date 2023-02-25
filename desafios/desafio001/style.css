@@ -1,0 +1,36 @@
+@charset "UTF-8";
+
+body {
+    margin: 0px;
+    padding: 0px;
+    background-image: linear-gradient(rgb(68, 0, 255), rgb(81, 0, 128));
+    background-repeat: no-repeat;
+    height: 97.7vh;
+    color: white;
+    font-family:   sans-serif ;
+    text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.089);
+}
+
+header {
+    text-align: center;
+}
+
+section {
+    
+    background-color: white;
+    color: black;
+    margin: auto;
+    width: 500px;
+    padding: 15px;
+    box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.644);
+}
+
+div {
+    text-align: center;
+    padding: 5px;
+
+}
+
+footer {
+    text-align: center;
+}
