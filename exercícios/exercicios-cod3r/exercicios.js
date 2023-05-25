@@ -266,3 +266,218 @@ const aumentoPorPlano = (plano, salario) => {
 /* 18) Faça um programa que leia um número entre 0 e 10, e escreva este número por extenso. Use o comando
 switch. Crie um case default que escreva ‘Número fora do intervalo.’
 */
+
+const numeroEscrito = (num, linguagem) => {
+    if(linguagem == "Português")
+    {
+        switch(num) {
+            case 1: return "Um"
+            break
+            case 2: return "Dois"
+            break
+            case 3: return "Três"
+            break
+            case 4: return "Quatro"
+            break
+            case 5: return "Cinco"
+            break
+            case 6: return "Seis"
+            break
+            case 7: return "Sete"
+            break
+            case 8: return "Oito"
+            break
+            case 9: return "Nove"
+            break
+            case 10: return "Dez"
+            break
+            default: return "[ERRO]\nNúmero fora do intervalo"
+            break
+        }
+    }
+
+    else if(linguagem == "English")
+    {
+        switch(num) {
+            case 1: return "One"
+            break
+            case 2: return "Two"
+            break
+            case 3: return "Three"
+            break
+            case 4: return "Four"
+            break
+            case 5: return "Five"
+            break
+            case 6: return "Six"
+            break
+            case 7: return "Seven"
+            break
+            case 8: return "Eight"
+            break
+            case 9: return "Nine"
+            break
+            case 10: return "Ten"
+            break
+            default: return "[ERROR]\nNumber out of the interval"
+            break
+        }
+    }
+}
+
+// Resolvi deixar mais legal colocando em 2 idiomas kkkkk
+// I decided to make it funnier applying it in 2 languages     lol
+//console.log(numeroEscrito(2, "English"))
+
+/*19) O cardápio de uma lanchonete é o seguinte:
+Código Descrição do Produto Preço
+100 Cachorro Quente R$ 3,00
+200 Hambúrguer Simples R$ 4,00
+300 Cheeseburguer R$ 5,50
+400 Bauru R$ 7,50
+500 Refrigerante R$ 3,50
+600 Suco R$ 2,80
+Implemente uma função que receba como parâmetros o código do item pedido, a quantidade e calcule o valor
+a ser pago por aquele lanche. Considere que a cada execução somente será calculado um item. Use o
+comando switch. Crie um caso default para produto não existente. */
+
+const cardápio = (código, qtd) => {
+    switch (código) {
+        case 100: return `R$${qtd*3}`
+        break
+        case 200: return `R$${qtd*4}`
+        break
+        case 300: return `R$${qtd*5.5}`
+        break
+        case 400: return `R$${qtd*7.5}`
+        break
+        case 500: return `R$${qtd*3.5}`
+        break
+        case 600: return `R$${qtd*2.8}`
+        break
+        default: return "Produto não existente"
+        break
+    }
+}
+
+
+//console.log(cardápio(600, 5))
+
+/*20) Crie um programa para informar quais e quantas notas são necessárias para entregar o mínimo de cédulas
+para um determinado valor informado pelo usuário considerando notas de R$ 100, R$ 50, R$ 10 e R$ 5 e R$ 1.
+Seu programa deve mostrar apenas as notas utilizadas. Por exemplo, ao solicitar R$18, o programa deve
+informar apenas a seguinte informação (note que não foram exibidas informações sobre as demais cédulas): 1
+nota(s) de R$ 10. 1 nota(s) de R$ 5. 3 nota(s) de R$ 1.
+ */
+
+const notasMaiorValor = (quantia) => {
+    let nota100 = 0
+    let nota50 = 0
+    let nota10 = 0
+    let nota5 = 0
+    let nota1 = 0
+    let valorDasNotas = calcularValor(quantia)
+    while(quantia >= valorDasNotas) {
+        switch(valorDasNotas) {
+            case 100: 
+            quantia -= 100
+            nota100++
+            break
+            case 50:
+            quantia -= 50
+            nota50++
+            break
+            case 10:
+            quantia -= 10
+            nota10++
+            break
+            case 5:
+            quantia -= 5
+            nota5++
+            break
+            case 1:
+            quantia -= 1
+            nota1++
+            break
+        }
+        valorDasNotas = calcularValor(quantia)
+    } 
+    return elaborarResultado(nota100, nota50, nota10, nota5, nota1)
+}
+
+function calcularValor(quantia) {
+    if (quantia >= 100) {
+        return 100
+    } else if (quantia >= 50) {
+        return 50
+    } else if (quantia >= 10) {
+        return 10
+    } else if (quantia >= 5) {
+        return 5
+    } else if (quantia >= 1) {
+        return 1
+    }
+}
+
+function elaborarResultado(nota100, nota50, nota10, nota5, nota1) {
+    let resultado = ''
+
+    if (nota100 > 0) {
+        resultado += `${nota100} nota(s) de R$ 100\n`
+    }
+
+    if (nota50 > 0) {
+        resultado += `${nota50} nota(s) de R$ 50\n`
+    }
+
+    if (nota10 > 0) {
+        resultado += `${nota10} nota(s) de R$ 10\n`
+    }
+
+    if (nota5 > 0) {
+        resultado += `${nota5} nota(s) de R$ 5\n`
+    }
+
+    if (nota1 > 0) {
+        resultado += `${nota1} nota(s) de R$ 1\n`
+    }
+
+    return resultado
+}
+
+//console.log(notasMaiorValor(274));
+
+/*21) Criar um programa para identificar o valor a ser pago por um plano de saúde dada a idade do conveniado
+considerando que todos pagam R$ 100 mais um adicional conforme a seguinte tabela: 1) crianças com menos
+de 10 anos pagam R$80; 2) conveniados com idade entre 10 e 30 anos pagam R$50; 3) conveniados com
+idade acima de 30 e até 60 anos pagam R$ 95; e 4) conveniados acima de 60 anos pagam R$130 */
+
+const planoDeSaúde = (idade) => {
+    let preco = 100
+    idade < 10 ? preco+= 80 : 
+    idade >= 10 && idade <= 30 ? preco+= 50 : 
+    idade > 30  && idade <= 60? preco+= 95 :
+    idade > 60 ? preco+= 130 : preco = preco
+    return `Como você tem ${idade} anos, seu convênio custa R$${preco},00`
+}
+
+//console.log(planoDeSaúde(65))
+
+/*22) Criar uma função para calcular o valor a ser pago de anuidade de uma associação. A função recebe como
+parâmetro um inteiro que representa o mês (1 - janeiro, 2 - fevereiro…) que foi paga e o valor da anuidade. A
+anuidade deve ser paga no mês de janeiro. Por mês, é cobrado 5% de juros (sob o regime de juros
+compostos). O retorno deve ser o valor a ser pago para o respectivo mês escolhido.
+ */
+
+const anuidade = (mes, valorAnuidade) => {
+    let juros = mes - 1
+    if(mes > 1 && mes < 13) {
+        let valorfinal = (valorAnuidade * ((1 + (5/100))**juros)).toFixed(2)
+        return valorfinal
+    } 
+    else {
+        return "Mês inválido"
+    }
+}
+
+//console.log(anuidade(4,100))
