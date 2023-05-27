@@ -481,3 +481,59 @@ const anuidade = (mes, valorAnuidade) => {
 }
 
 //console.log(anuidade(4,100))
+
+/*23) Escreva um algoritmo que leia o código de um aluno e suas três notas. Calcule a média ponderada do
+aluno, considerando que o peso para a maior nota seja 4 e para as duas restantes, 3. Mostre o código do
+aluno, suas três notas, a média calculada e uma mensagem "APROVADO" se a média for maior ou igual a 5 e
+"REPROVADO" se a média for menor que 5. Repita a operação até que o código lido seja negativo.
+ */
+
+const calcularNota = (codigo, nota1, nota2, nota3) =>{
+    let notas = []
+    notas.push(nota1)
+    notas.push(nota2)
+    notas.push(nota3)
+    notas.sort((a,b) => a < b ? 1 : -1)
+
+    let media = (notas[0] * 4 + notas[1] * 3 + notas[2] * 3)/10
+    console.log(`Código do Aluno: ${codigo}. Notas: ${nota1}, ${nota2}, ${nota3}. ${media < 5 ? 'Reprovado.' : 'Aprovado.'}`)
+}
+
+//calcularNota(123, 2.8, 6, 3.5)
+
+
+/*24) Crie um programa que imprima 11 vezes a frase " Hello World!" utilizando uma estrutura de repetição while.
+ */
+
+const imprimirHelloWorld = () => {
+    let i = 0
+    while(i<12) {
+        console.log(`${i}- Hello World!`)
+        i++
+    }
+}
+//imprimirHelloWorld()
+
+/*25) Escrever um programa para exibir os números de 1 até 50 na tela.
+ */
+
+const num1a50 = () => {
+    for(i=0;i<=50;i++){console.log(i)} 
+}
+
+//console.log(num1a50())
+
+/*26) Fazer um programa para encontrar todos os pares entre 1 e 100.
+ */
+
+const par1a100 = () => {
+    for(i=0;i<=100;i+=2)
+    {console.log(i)}
+}
+
+//console.log(par1a100())
+
+/* 27) Construa uma função que receba como parâmetros as alturas e as taxas de crescimento anuais de duas
+crianças e calcule se existe uma criança menor, caso exista se a criança menor ultrapassará a maior e em
+quantos anos isso acontecerá. Utilize centímetros para as unidades de medida.
+*/
