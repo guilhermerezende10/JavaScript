@@ -537,3 +537,211 @@ const par1a100 = () => {
 crianças e calcule se existe uma criança menor, caso exista se a criança menor ultrapassará a maior e em
 quantos anos isso acontecerá. Utilize centímetros para as unidades de medida.
 */
+
+const ficarMaior = (alt1, alt2, taxa1, taxa2) => {
+    if (alt1 == alt2) {
+      return "Alturas iguais, código não funciona";
+    }
+  
+    let maior, menor, maiorTaxa, menorTaxa;
+  
+    if (alt1 > alt2) {
+      maior = alt1;
+      maiorTaxa = taxa1;
+      menor = alt2;
+      menorTaxa = taxa2;
+    } else {
+      maior = alt2;
+      maiorTaxa = taxa2;
+      menor = alt1;
+      menorTaxa = taxa1;
+    }
+  
+    let anos = 0;
+  
+    while (menor <= maior) {
+      menor += menor * menorTaxa;
+      maior += maior * maiorTaxa;
+      anos++;
+    }
+  
+    return `A criança menor ultrapassará a maior em ${anos} anos.`;
+  };
+//console.log(ficarMaior(1.5, 1.4, 0.12, 0.13))
+
+/*28) Ler um vetor de números inteiros e imprimir quantos são pares e quantos são ímpares. */
+
+const parImpar = () => {
+    let numerosInteiros = [3,4,54,6,4,2,34,56,27,62,35,37]
+    let par = 0
+    let impar = 0
+    for (let i in numerosInteiros) {
+        numerosInteiros[i]%2==0 ? par++ : impar++
+    }
+    return `${par} numeros são pares \n${impar} numeros são ímpares`
+}
+
+//console.log(parImpar())
+
+/*29) Utilizando a estrutura de repetição for, faça uma função que percorra um vetor e conte quantos números
+deste vetor estão no intervalo [10,20] (repare que o intervalo é fechado, ou seja, inclui o 10 e o 20) e quantos
+deles estão fora do intervalo, escrevendo estas informações.
+ */
+
+const intervalo = () => {
+    let vetor = [6,10,12,13,15,17,19,23,27]
+    let dentro = 0
+    let fora = 0
+    for(let i in vetor) {
+        vetor[i] > 9 && vetor[i] < 21 ? dentro++ : fora++ 
+    }
+    return `${dentro} estão dentro \n${fora} estão fora`
+}
+
+//console.log(intervalo())
+
+/*30) Escreva um algoritmo que percorre um vetor de inteiros e defina o maior e menor valor dentro do vetor.
+ */
+
+const maiorMenor = () => {
+    let inteiros = [6,10,12,13,15,17,19,23,27]
+    let maior = 0
+    let menor = 9999**9999
+    for(i in inteiros) {
+        if(maior < inteiros[i]) {
+            maior = inteiros[i]
+        } 
+        if(menor > inteiros[i]) {
+            menor = inteiros[i]
+        } 
+    }
+    return `${maior} é o maior número \n${menor} é o menor número`
+}
+
+//console.log(maiorMenor())
+
+/*31) Escrever um algoritmo que percorre um vetor de inteiros, conta quantos números negativos há nesse vetor
+e imprime a quantidade no console. */
+
+const negativos = () => {
+    let numeros = [6,-10,-12,-13,15,-17,-19,23,-27]
+    let negativos = 0
+    for( let i in numeros) {
+        if (numeros[i] < 0) negativos++
+    }
+    return negativos
+}
+
+//console.log(negativos())
+
+/*32) Construir um algoritmo que calcule a média aritmética dos valores de um vetor de inteiros.
+ */
+
+const mediaAritimetica = () => {
+    let inteiros = [6,10,12,13,15,17,19,23,27]
+    let soma = 0
+    for(i in inteiros) {
+        soma+=inteiros[i]
+    }
+    let media = soma / inteiros.length 
+    return media
+}
+
+//console.log(mediaAritimetica())
+
+/*33) Crie três vetores, chamados vetorInteiro, vetorString e vetorDouble. Cada um destes vetores deverá conter
+quatro valores, sendo o primeiro com valores inteiros, o segundo com strings e o terceiro com valores decimais.
+Declarados os vetores, utilize a função de união concat() de duas maneiras diferentes para unir os vetores, e
+mostre o resultado no console. Todos os elementos do vetor resultado deverão aparecer no console.
+ */
+
+const vetores = () =>{
+    const vetorInteiro = [1, 2, 3, 4]
+    const vetorString = ['a', 'b', 'c', 'd']
+    const vetorDouble = [1.1, 2.2, 3.3, 4.4]
+
+    const resultado1 = vetorInteiro.concat(vetorString)
+    console.log("Resultado 1:", resultado1)
+
+    const resultado2 = vetorDouble.concat(vetorInteiro, vetorString)
+    console.log("Resultado 2:", resultado2)
+}
+
+//console.log(vetores())
+
+/*34) Construa uma função que receberá duas Strings de tamanhos variados e que retornará True ou False caso
+todos os caracteres (independentemente de ser maiúsculo ou minúsculo) estejam contidos em ambas palavras */
+
+const caracteresIguais = (word1, word2) => {
+    const lowercaseWord1 = word1.toLowerCase()
+    const lowercaseWord2 = word2.toLowerCase()
+
+    for (let i = 0; i < lowercaseWord1.length; i++) {
+        const currentChar = lowercaseWord1.charAt(i)
+        
+        if (!lowercaseWord2.includes(currentChar)) {
+        return false
+        }
+    }
+
+    for (let i = 0; i < lowercaseWord2.length; i++) {
+        const currentChar = lowercaseWord2.charAt(i)
+        
+        if (!lowercaseWord1.includes(currentChar)) {
+        return false
+        }
+    }
+
+  return true
+}
+
+//console.log(caracteresIguais("io", "oi"))
+
+/*35) Crie dois vetores chamados vetorPilha e vetorAdiciona. Inicialmente, o vetorPilha conterá cinco elementos
+inteiros: [1, 2, 3, 4, 5]. Você deverá adicionar os valores contidos no vetorAdiciona [6, 7, 8, 9, 10] ao vetor pilha
+e mostrá-los no console. É importante lembrar que o método Push retorna somente o tamanho do Vetor. Ao
+final das operações imprima os vetores no console.
+ */
+
+const vetores2 = () => {
+    const vetorPilha = [1, 2, 3, 4, 5]
+    const vetorAdiciona = [6, 7, 8, 9, 10]
+    let juntar = vetorPilha.concat(vetorAdiciona)
+    
+    return juntar
+}
+
+//console.log(vetores2())
+
+/*36) Crie duas funções que recebem dois parâmetros, um vetor com apenas valores numéricos e um número
+inteiro. Faça com que a primeira função retorne outro vetor que será resultado da multiplicação de cada
+elemento pelo número passado como parâmetro. A segunda função fará o mesmo da primeira se e somente se
+o valor do elemento for maior que 5.
+ */
+
+const array = [1, 2, 3, 4, 5]
+
+const arrayMultiplicador = (array, num) => {
+    let novoArray = []
+    array.forEach(elemento => {
+        novoArray.push(elemento * num)
+    });
+    return novoArray
+}
+
+const arrayMultiplicadorX5 = (array, num) => {
+    let novoArray2 = []
+    if(num < 5) return
+    array.forEach(elemento => {
+        novoArray2.push(elemento * num)
+    });
+    return novoArray2
+}
+
+//console.log(arrayMultiplicador(array, 3))
+//console.log(arrayMultiplicadorX5(array, 6))
+
+/*37) Escreva duas funções, uma para progressão aritmética e uma para progressão geométrica que recebam
+como parâmetros um número n (número de termo), a1 (o primeiro termo) e r (a razão) e escreva os n termos ,
+bem como a soma dos elementos */
+
