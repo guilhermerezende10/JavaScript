@@ -745,3 +745,75 @@ const arrayMultiplicadorX5 = (array, num) => {
 como parâmetros um número n (número de termo), a1 (o primeiro termo) e r (a razão) e escreva os n termos ,
 bem como a soma dos elementos */
 
+const progressãoAritimetica = (n, a1, r) => {
+    for(let i = 0; i<n; i++) {
+        console.log(a1 + r * i)
+    }
+    console.log('Soma: ' + (n * (a1 + (a1 + ((n-1)*r))))/2) 
+}
+
+const progressãoGeométrica = (n,a1,r) => {
+    for(let i = 0; i<n; i++) {
+        console.log(a1 *( r ** i))
+    }console.log('Soma: ' + (a1 * ((r**n)-1))/(r-1))
+}
+
+//progressãoAritimetica(10, 998, 2)
+//progressãoGeométrica(10, 2, 2)
+
+/*38) Escreva uma função que receba dois parâmetros início e fim. Essa função deve imprimir todos os números
+ímpares que estão entre esses valores. Por padrão os valores devem ser 0 para início e 100 para fim. Atente
+para corrigir a ordem dos parâmetros caso a função receba o valor maior antes do menor.
+ */
+
+const inicioFim = (inicio = 0, fim = 150) => {
+    if(inicio > fim) {
+        let auxiliar = inicio
+        inicio = fim
+        fim = auxiliar
+    }
+    for(; inicio <= fim; inicio++) {
+        if(inicio%2!=0) {console.log(inicio) }
+    }
+}
+
+//inicioFim(5, 15)
+
+/*39) Crie uma função que receba dois vetores de igual tamanho e troque seus elementos de modo que o
+primeiro elemento do vetorA passe a ser o primeiro elemento do vetorB e vice versa e assim sucessivamente.
+Faça a troca sem utilizar uma variável auxiliar. */
+
+let vetor1 = [2,4,5,7]
+let vetor2 = [3,6,9,10]
+
+const trocaDeVetor = (vetor1, vetor2) => {
+    if(vetor1.length == vetor2.length)  {
+        for(i=0; i<vetor1.length; i++) {
+            vetor1[i] = vetor1[i] + vetor2[i]
+            vetor2[i] = vetor1[i] - vetor2[i]
+            vetor1[i] = vetor1[i] - vetor2[i]
+        }
+        return `vetor1: ${vetor1} \nvetor2: ${vetor2}`
+    }
+    else {return 'Vetores de tamanhos diferentes.'}
+}
+
+//console.log(trocaDeVetor(vetor1, vetor2))
+
+/*40) Faça uma função que receba como parâmetro um vetor de notas e mostre os conceitos de cada uma de
+modo que de 0,0 a 4,9 seja atribuído o conceito D, de 5,0 a 6,9 seja atribuído o conceito C, de 7,0 a 8,9 o
+conceito B e de 9,0 a 10,0 o conceito A. */
+
+const notasEscolares = [2.1,4.4,5.1,7.8,9.7,10.0]
+
+const notasDaProva = (notasEscolares) => {
+    for(i=0; i<notasEscolares.length;i++) {
+        let nota = notasEscolares[i]
+        if(nota<5.0) console.log(`${nota} = nota D`)
+        if(nota>5 && nota<7) console.log(`${nota} = nota C`)
+        if(nota>7 && nota<9) console.log(`${nota} = nota B`)
+        if(nota>9) console.log(`${nota} = nota A`)
+    }
+}
+
+notasDaProva(notasEscolares)
