@@ -1,9 +1,16 @@
 const dogs = [
+    { weight: 32, curFood: 340, owners: ['Michael'] },
     { weight: 22, curFood: 284.43, owners: ['Alice', 'Bob'] },
     { weight: 8, curFood: 200, owners: ['Matilda'] },
     { weight: 13, curFood: 275, owners: ['John', 'Sarah'] },
-    { weight: 32, curFood: 340, owners: ['Michael'] },
-]
+    { weight: 18, curFood: 320, owners: ['David', 'Emily'] },
+    { weight: 27, curFood: 420.5, owners: ['Chris'] },
+    { weight: 12, curFood: 250, owners: ['Olivia', 'Sophia'] },
+    { weight: 25, curFood: 360, owners: ['James', 'Liam'] },
+    { weight: 15, curFood: 300.75, owners: ['Emma', 'Ethan'] },
+    { weight: 20, curFood: 375, owners: ['Ava'] }
+];
+
 
 dogs.forEach(dog => {
     dog.recommendedFood = Number(dog.weight ** 0.75 * 28).toFixed(2)
@@ -82,24 +89,23 @@ okay()
 //console.log(eatingOkay)
 
 const shallowCopy = () => {
-    let dogsCopy = [[dogs[0]]]
-    dogs.forEach(dog => {
+    let dogsCopy = [dogs[0]]
+
+    for(var i = 1; i < dogs.length; i++) {
         var index = 0
-        for(var i = 1; i < dogsCopy.length; i++) {
-            //console.log(`Blagdf: ${i}`)
-            console.log(`dogsCopy[i].recommendedFood: ${i}`)
-            dog.recommendedFood > dogsCopy[i].recommendedFood ? index = i + 1 : index = i
+        for(var j = 0; j < dogsCopy.length; j++) {
+            dogs[i].recommendedFood > dogsCopy[j].recommendedFood ? index = j + 1 : null
         }
 
-        console.log(`index: ${index}`)
+        console.log(`index: ${index}`) 
 
-        //dogsCopy.splice(index, 0, dog) 
-    })
+        dogsCopy.splice(index, 0, dogs[i]) 
+    }
 
-    //console.log("\n\n")
-    //console.log(dogs)
     console.log("\n\n")
-    //console.log(dogsCopy)
+    console.log(dogs)
+    console.log("\n\n")
+    console.log(dogsCopy)
 }
 
 shallowCopy()
