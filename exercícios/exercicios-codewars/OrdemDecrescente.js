@@ -1,5 +1,5 @@
-function descendingOrder(n){
-    return parseInt(String(n).split('').sort().join(''))
+function descendingOrder(num){
+    return parseInt(String(num).split('').sort().join(''))
   }   
   
   console.log(descendingOrder(987654321))

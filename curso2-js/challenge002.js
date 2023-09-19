@@ -12,16 +12,15 @@ function compareBMI () {
     const marktall = 1.69
     const jontall = 1.95
 
-    let BMImark = markweight / marktall ** 2
-    let BMIjon = jonweight / jontall ** 2
+    let BMImark = markweight / marktall * marktall
+    let BMIjon = jonweight / jontall * jontall
       
     if (BMImark > BMIjon) {
-        var HigherBMI = "Mark"
+        return `Mark's BMI (${BMImark}) is higher than John's BMI (${BMIjon})! `
     }
     else {
-        var HigherBMI = "Jon"
+        return `John's BMI (${BMIjon}) is higher than Mark's (${BMImark})! `
     }
-    return "Mark's BMI: " + BMImark.toFixed(3) + "\nJon's BMI: " + BMIjon.toFixed(3) + "\n"+HigherBMI +" has the higher BMI"
 }
 
 console.log(compareBMI())
