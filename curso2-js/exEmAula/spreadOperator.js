@@ -21,13 +21,6 @@ const me = 'Guilherme'
 let nome = [...me, ' ', 'R.'].join().replace(/,/g, "")
 console.log(...nome)
 
-const orderPasta = function (ing1, ing2, ing3) {
-    console.log(`Here is your delicious pasta with ${ing1}, ${ing2}, and ${ing3}.`)
-}
-const ingredients = ['Cheese', 'Parmesan', 'White sauce']
-orderPasta(ingredients[0], ingredients[1], ingredients[2])
-orderPasta(...ingredients) //New way in ES6 to pass all arguments from an array to a function
-
 // Objects
 
 const restaurant = {
@@ -57,8 +50,16 @@ const restaurant = {
 
     orderDelivery: function({starterIndex = 1, time = '20:00', address, mainIndex = 0}) {
         console.log(`\nOrder received! ${this.starterMenu[starterIndex]} and ${this.mainMenu[mainIndex]} will be delivered to ${address} at ${time} \n`)
+    },
+
+    orderPasta: function (ing1, ing2, ing3) {
+        console.log(`Here is your delicious pasta with ${ing1}, ${ing2}, and ${ing3}.`)
     }
 }
+
+const ingredients = ['Cheese', 'Parmesan', 'White sauce']
+restaurant.orderPasta(ingredients[0], ingredients[1], ingredients[2])
+restaurant.orderPasta(...ingredients) //New way in ES6 to pass all arguments from an array to a function
 
 const newRestaurant = {foundedeIn: 1998, ...restaurant, founder: nome}
 console.log(newRestaurant)
