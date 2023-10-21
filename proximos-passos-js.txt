@@ -2,7 +2,6 @@ NOVIDADES: (leia também comentários deste post)
 
     O que estudar?
   Functions:
-Arrow Functions 
 Callbacks
 Funções Anônimas
 iife
