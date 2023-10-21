@@ -1,0 +1,73 @@
+<!-- Guilherme Rezende Silva. RM: 230278-->
+<!-- Daniel Alcatrão. RM: 230120-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Programa bloqueador de Números repetidos</title>
+    <style>
+        body {
+            height: 100vh;
+            background-image: linear-gradient(to top, rgb(90, 193, 253), rgb(200, 250, 246));
+            background-repeat: no-repeat;
+        }
+
+        h1 {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            text-align: center;
+        }
+
+        button {
+            text-align: center;
+            padding: 10px;
+            margin: 10px;
+            border: none;
+            border-radius: 10px;
+            box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.486);
+        }
+
+        button:hover {
+            background-color: rgba(216, 216, 216, 0.322);
+            cursor: pointer;
+        }
+
+        input {
+            text-align: center;
+            padding: 10px;
+            margin: 10px;
+            border: none;
+            border-radius: 10px;
+            box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.486);
+        }
+
+        label {
+            font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+            margin: 10px;
+            padding: 10px;
+        }
+
+        .inputs {
+            display: flex;
+            justify-content: center;
+            background: rgb(233, 233, 233);
+            margin: auto;
+            width: 600px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Programa bloqueador de Números repetidos</h1>
+    <div class="inputs">
+        <label for="num">Número:</label>
+        <input type="number" name="num" id="num" placeholder="Digite um número">
+        <button type="submit" onclick="verificarNum()">Adicionar Número</button>
+        <button type="submit" onclick="verificarOrdem()">Verificar Ordem</button>
+    </div>
+    <h1>Lista de números NÃO repetidos:</h1>
+    <div class="inputs">
+        <p><pre id="outLista"></pre></p>
+    </div>
+    <script src="ex002.js"></script>
+</body>
+</html>
