@@ -1,6 +1,12 @@
-let amigo = {nome:'Pedrola', sexo:'M', peso:892, emagrecer(p){ 
-    console.log('Vai uma batatinha, bola de pilates?')
-    this.peso += p
-} }
-amigo.emagrecer(2)
-console.log(`${amigo.nome} pesa ${amigo.peso}Kg`)
+// Estrutura basica de objeto em JavaScript:
+
+const person = {
+    name: 'Messi',
+    address: 'China',
+    age: 59,
+    occupation: 'teacher',
+}
+console.log(person.name)
+console.log(person.address)
+console.log(person.age)
+console.log(person.occupation)
