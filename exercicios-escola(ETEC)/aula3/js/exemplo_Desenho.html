@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Desenho</title>
+    </head>
+    <body>
+        <canvas id="meu_canvas" width="300" height="300"></canvas>
+        <script>
+            //Canvas e contexto
+            var canvas = document.getElementById('meu_canvas')
+            var context = canvas.getContext('2d')
+
+            // Cores e espessura da linha
+            context.fillStyle = 'gray'
+            context.strokeStyle = 'black'
+            context.lineWidth = 2
+
+            // Primeiro arco:
+            // Novo path
+            context.beginPath()
+            // Desenha
+            context.arc(50, 50, 40, 90 * Math.PI / 180, 270 * Math.PI / 180, false)
+            context.fill()
+            context.stroke()
+            // Desenha
+            context.arc(50, 50, 40, 90 * Math.PI / 180, 270 * Math.PI / 180, true)
+            context.fill()
+            context.stroke()
+
+            //Circunferencia completa
+            context.beginPath()
+            context.arc(250, 50, 40, 0, 2 * Math.PI)
+            context.fill()
+            context.stroke()
+        </script>
+    </body>
+</html>

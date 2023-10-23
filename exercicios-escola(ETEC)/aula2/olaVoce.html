@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+   
+    </style>
+</head>
+<body>
+    <h1>Escreva seu nome</h1>
+    <input type="text" name="nome" id="nome" placeholder="Nome">
+    <input type="submit" value="enviar" onclick="mostrar()">
+    <div id="escrever"></div>
+    <script>
+        
+        function mostrar(){
+            var nome = document.getElementById('nome')
+            var escrever = document.getElementById('escrever')
+            escrever.innerHTML = "Olá " + nome
+        }
+    </script>
+</body>
+</html>
+

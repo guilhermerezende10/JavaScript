@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body onload="vizinhos(), pizzaria(), pagamento(), media()">
+    <div class="vizinho"></div>
+    <div class="pizzaria"></div>
+    <div class="pagamento"></div>
+    <div class="media"></div>
+    <script>
+
+        const vizinhos = (num) => {
+            vizim = document.getElementsByClassName('vizinho')
+            num = Number(prompt("digite um numero"))
+            alert(`${num + 1} e ${num - 1}`)
+        }
+
+        const pizzaria = (conta, qtdClientes) => {
+            conta = Number(prompt("digite o valor da conta"))
+            qtdClientes = Number(prompt("qual a qtd de clientes?"))
+            alert(conta / qtdClientes)
+        }
+
+        const pagamento = (preco) => {
+            preco = Number(prompt("digite o preco"))
+            alert(`Á vista com 10% de desconto: ${preco * 0.9}\n Parcelado em 3x: ${preco /3}`)
+        }
+
+        const media = (nota1, nota2) =>  {
+            nota1 = Number(prompt("Qual a nota da primeira prova"))
+            nota2 = Number(prompt("Qual a nota da segunda prova"))
+            alert("media:" + (nota1 + nota2) / 2)
+        }
+
+    </script>
+</body>
+</html>
