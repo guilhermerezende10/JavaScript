@@ -27,14 +27,9 @@ const listarNum = () => {
 }
 
 const verificarOrdem = () => {
-    let verifica = undefined
-    for (let i = 0; i < listaNum.length; i++) {
-			if(listaNum[i] <= listaNum[i+1]) {
-				verifica = true
-			}
-			else {
-                return alert('A lista de números NÃO está em ordem')
-            }
-	}
-	if(verifica) alert('A lista está em ordem.')	
+    for(let i = 0; i < listaNum.length; i++) {
+        if(Number(listaNum[i + 1]) < Number(listaNum[i])) return alert('A lista de números NÃO está em ordem')
+    }
+    alert('A lista está em ordem.')	
 }
+

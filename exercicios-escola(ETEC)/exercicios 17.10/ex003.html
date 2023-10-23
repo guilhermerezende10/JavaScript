@@ -1,0 +1,86 @@
+<!-- Guilherme Rezende Silva. RM: 230278-->
+<!-- Daniel Alcatrão. RM: 230120-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Programa de Concurso</title>
+    <style>
+        body {
+            height: 100vh;
+            background-image: linear-gradient(to top, rgb(90, 193, 253), rgb(200, 250, 246));
+            background-repeat: no-repeat;
+        }
+
+        h1 {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            text-align: center;
+            
+        }
+
+        pre {
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        button {
+            text-align: center;
+            padding: 10px;
+            margin: 10px;
+            border: none;
+            border-radius: 10px;
+            box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.486);
+            
+        }
+
+        button:hover {
+            background-color: rgba(216, 216, 216, 0.322);
+            cursor: pointer;
+        }
+
+        input {
+            text-align: center;
+            padding: 10px;
+            margin: 10px;
+            border: none;
+            border-radius: 10px;
+            box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.486);
+            
+        }
+
+        label {
+            font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+            margin: 10px;
+            padding: 10px;
+            font-size: 1.3em;
+        }
+
+        .inputs {
+            display: grid;
+            justify-content: center;
+            place-items: center;
+            background: rgb(233, 233, 233);
+            margin: auto;
+            width: 500px;
+            padding-top: 30px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Programa de Concurso</h1>
+    <div class="inputs">
+        <label for="nome">Nome:</label>
+        <input type="text" name="nome" id="nome" placeholder="Digite seu nome">
+        <label for="acertos">Acertos:</label>
+        <input type="num" name="acertos" id="acertos" placeholder="Digite sua nota (máx100)">
+        <button type="submit" onclick="candidatos()">Verificar</button>
+        <button type="submit" onclick="aprovados()">Ver aprovados 2° fase</button>
+    </div>
+
+
+    <div class="inputs">
+        <p><pre id="outLista"></pre></p>
+    </div>
+    <script src="ex003.js"></script>
+</body>
+</html>
