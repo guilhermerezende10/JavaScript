@@ -1,0 +1,30 @@
+@charset "UTF-8";
+
+h1 {
+    text-align: center;
+}
+
+.jogoDaVelha {
+    background-color: black;
+    display: flex;
+    font-size: 1.5em;
+    flex-direction: row;
+    justify-content: center;
+    margin: auto;
+    text-align: center;
+    
+    width: 246px;
+    flex-wrap: wrap;
+    
+}
+
+.jogoDaVelha > div {
+    display: grid;
+    place-items: center;
+    margin: 1px;
+    width: 6em;
+    cursor: pointer;
+    background-color: white;
+    width: 80px;
+    height: 80px;
+}
