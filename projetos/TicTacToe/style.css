@@ -1,5 +1,13 @@
 @charset "UTF-8";
 
+header {
+    display: flex;
+    margin: auto;
+    justify-content: center;
+    font-size: 1.6em;
+    padding: 10px;
+}
+
 h1 {
     text-align: center;
 }
@@ -27,4 +35,28 @@ h1 {
     background-color: white;
     width: 80px;
     height: 80px;
+}
+
+.jogoDaVelha > div:hover {
+    background-color: rgb(204, 204, 204);
+}
+
+button {
+    display: flex;
+    margin: auto;
+    justify-content: center;
+    padding: 5px;
+}
+
+#blue {
+    background-color: rgb(82, 198, 233);
+    width: 20px;
+    height: 20px;
+    margin: 8px;
+}
+#red {
+    background-color: rgb(240, 70, 70);
+    width: 20px;
+    height: 20px;
+    margin: 8px;
 }
