@@ -154,9 +154,6 @@ function checkWin(machine = user === 'X' ? 'O' : 'X') {
     document.getElementById('outCountYou').textContent = ' ' + youCount
     document.getElementById('outCountMachine').textContent = ' '+ machineCount
 
-    if(winner || draw) {
-        clean()
-    }
 }
 
 function clean() {
