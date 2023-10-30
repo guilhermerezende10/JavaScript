@@ -136,10 +136,10 @@ function checkWin(machine = user === 'X' ? 'O' : 'X') {
 function clean() {
     for(let i = 1; i <= 9; i++){
         let btnStr = 'button' + i
-        document.getElementById(btnStr).textContent = i
+        document.getElementById(btnStr).textContent = ""
         document.getElementById(btnStr).style.backgroundColor = "white"
-        buttonValues = []
+    }
+    buttonValues = []
         game = [1, 2, 3, 4, 5, 6, 7, 8, 9]
         winner = false
-    }
 }

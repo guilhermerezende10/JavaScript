@@ -1,5 +1,14 @@
 @charset "UTF-8";
 
+* {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+    background-color: #18181B;
+    color: #fff;
+}
+
 header {
     display: flex;
     margin: auto;
@@ -20,6 +29,7 @@ h1 {
     justify-content: center;
     margin: auto;
     text-align: center;
+    box-shadow: 8px 4px 10px 5px #1d4fd81e;
     
     width: 246px;
     flex-wrap: wrap;
@@ -42,10 +52,21 @@ h1 {
 }
 
 button {
+    color: #fff;
+    font-size: 1em;
+    background-color: #1d4ed8;
+    cursor: pointer;
+    border-radius: 8px;
     display: flex;
     margin: auto;
     justify-content: center;
-    padding: 5px;
+    padding: 10px;
+    box-shadow: 8px 4px 10px 5px #1d4fd81e;
+    border: none;
+}
+
+button:hover {
+    background-color: #1e40af;
 }
 
 #blue {
@@ -59,4 +80,37 @@ button {
     width: 20px;
     height: 20px;
     margin: 8px;
+}
+
+
+
+
+
+footer{
+    position: relative;
+    display: grid;
+    gap: 2rem;
+}
+
+
+footer .socials{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+}
+
+footer .socials a{
+    color: #fff;
+    border: 1px solid #fff;
+    padding: 5px 10px;
+    font-size: 1.25rem;
+    border-radius: 100%;
+    transition: all 0.3s ease;
+}
+
+footer .socials a:hover{
+    color: #fff;
+    background-color: #1d4ed8;
+    border-color: #1d4ed8;
 }
