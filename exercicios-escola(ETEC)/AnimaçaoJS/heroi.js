@@ -15,14 +15,14 @@
     {
         atualizar: function()
         {
-            if(this.teclado.pressionadas (SETA _ESQUERDA) && this.x > 0)
+            if(this.teclado.pressionadas (SETA_ESQUERDA) && this.x > 0)
             {
-                this .direcao = DIRECAO _ESQUERDA;
+                this .direcao = DIRECAO_ESQUERDA;
                 this.x -= 10;
             }
-            else if(this.teclado.pressionadas (SETA_DIREITA) &8 this.x < this.context. canvas.whidth - 20)
+            else if(this.teclado.pressionadas (SETA_DIREITA) && this.x < this.context. canvas.whidth - 20)
             {    
-            this.direcao = DIRECAO_ DIREITA;
+            this.direcao = DIRECAO_DIREITA;
                 this.x += 10;
             }
         }
@@ -32,7 +32,7 @@
         }
         , atirar: function()
         {
-            var tiro = new Bola(this context);
+            var tiro = new Bola(this.context);
             tiro.x = this.x + 10;
             tiro.y = this.y +10;
             this.raio = 2;
@@ -49,3 +49,4 @@
             this.animacao.novoSprite(tiro);   
         }
     }
+

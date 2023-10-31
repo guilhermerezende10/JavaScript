@@ -1,14 +1,12 @@
 
 let game = [1, 2, 3, 4, 5, 6, 7, 8, 9]
-
 let winner = false
 let draw = false
-
 let youCount = 0
 let machineCount = 0
-
 let user = ""
 checkUser()
+let machine = user === 'X' ? 'O' : 'X'
 
 function checkUser() {
     if(user.length === 0 ) {
@@ -23,7 +21,7 @@ function checkUser() {
 }
 
 function button(num) {
-    if(game.includes(Number(num))) {
+    if(game.includes(Number(num)) && !winner && !draw) {
         const btnStr = 'button' + num
         const btnAtual = document.getElementById(btnStr)
         btnAtual.style.backgroundColor = 'rgb(82, 198, 233)'
@@ -35,7 +33,7 @@ function button(num) {
 
 const buttonClicked = function(btnAtual) {
     btnAtual.textContent = user
-    checkWin()
+    checkWin(user)
     artificialPlaying()
 }
 
@@ -46,7 +44,6 @@ function artificialPlaying() {
         } while(!game.includes(random))
         let randomStr = `button${random}` 
         let machineAtual = document.getElementById(randomStr)
-        let machine = user === 'X' ? 'O' : 'X'
         machineAtual.innerHTML = machine
         machineAtual.style.backgroundColor = 'rgb(240, 70, 70)'
         let indexRandom = game.indexOf(random)
@@ -54,97 +51,28 @@ function artificialPlaying() {
     }
 
     if(!winner && !draw){
-        checkWin()
+        checkWin(machine)
     }
 }
 
-function checkWin(machine = user === 'X' ? 'O' : 'X') {
+function checkWin(player) {
     const buttonValues = []
     for(let i = 1; i <= 9; i++){
         let btnStr = 'button' + i
         let btn = document.getElementById(btnStr).textContent
         buttonValues.push(btn)
     }
-    if(buttonValues[0] === buttonValues[1] && buttonValues[1] === buttonValues[2] && buttonValues[2] === user) {
-        alert('Congratulations, you won!!!')
-        winner = true
-        youCount++
-    }
-    else if(buttonValues[0] === buttonValues[1] && buttonValues[1] === buttonValues[2] && buttonValues[2] === machine) {
-        alert('Im sorry, you lost.')
-        winner = true
-        machineCount++
-    }
-    else if(buttonValues[0] === buttonValues[3] && buttonValues[3] === buttonValues[6] && buttonValues[6] === user) {
-        alert('Congratulations, you won!!!')
-        winner = true
-        youCount++
-    }
-    else if(buttonValues[0] === buttonValues[3] && buttonValues[3] === buttonValues[6] && buttonValues[6] === machine) {
-        alert('Im sorry, you lost.')
-        winner = true
-        machineCount++
-    }
-    else if(buttonValues[0] === buttonValues[4] && buttonValues[4] === buttonValues[8] && buttonValues[8] === user) {
-        alert('Congratulations, you won!!!')
-        winner = true
-        youCount++
-    }
-    else if(buttonValues[0] === buttonValues[4] && buttonValues[4] === buttonValues[8] && buttonValues[8] === machine) {
-        alert('Im sorry, you lost.')
-        winner = true
-        machineCount++
-    }
-    else if(buttonValues[1] === buttonValues[4] && buttonValues[4] === buttonValues[7] && buttonValues[7] === user) {
-        alert('Congratulations, you won!!!')
-        winner = true
-        youCount++
-    }
-    else if(buttonValues[1] === buttonValues[4] && buttonValues[4] === buttonValues[7] && buttonValues[7] === machine) {
-        alert('Im sorry, you lost.')
-        winner = true
-        machineCount++
-    }
-    else if(buttonValues[2] === buttonValues[5] && buttonValues[5] === buttonValues[8] && buttonValues[8] === user) {
-        alert('Congratulations, you won!!!')
-        winner = true
-        youCount++
-    }
-    else if(buttonValues[2] === buttonValues[5] && buttonValues[5] === buttonValues[8] && buttonValues[8] === machine) {
-        alert('Im sorry, you lost.')
-        winner = true
-        machineCount++
-    }
-    else if(buttonValues[2] === buttonValues[4] && buttonValues[4] === buttonValues[6] && buttonValues[6] === user) {
-        alert('Congratulations, you won!!!')
-        winner = true
-        youCount++
-    }
-    else if(buttonValues[2] === buttonValues[4] && buttonValues[4] === buttonValues[6] && buttonValues[6] === machine) {
-        alert('Im sorry, you lost.')
-        winner = true
-        machineCount++
-    }
-    else if(buttonValues[3] === buttonValues[4] && buttonValues[4] === buttonValues[5] && buttonValues[5] === user) {
-        alert('Congratulations, you won!!!')
-        winner = true
-        youCount++
-    }
-    else if(buttonValues[3] === buttonValues[4] && buttonValues[4] === buttonValues[5] && buttonValues[5] === machine) {
-        alert('Im sorry, you lost.')
-        winner = true
-        machineCount++
-    }
-    else if(buttonValues[6] === buttonValues[7] && buttonValues[7] === buttonValues[8] && buttonValues[8] === user) {
-        alert('Congratulations, you won!!!')
-        winner = true
-        youCount++
-    }
-    else if(buttonValues[6] === buttonValues[7] && buttonValues[7] === buttonValues[8] && buttonValues[8] === machine) {
-        alert('Im sorry, you lost.')
-        winner = true
-        machineCount++
-    }
+    
+    const combinations = [[0, 1, 2],[0, 3, 6],[0, 4, 8],[1, 4, 7],[2, 5, 8],[2, 4, 6],[3, 4, 5],[6, 7, 8],]
+    
+      for (const combo of combinations) {
+        if (combo.every(index => buttonValues[index] === player)) {
+          alert(player === user ? 'Congratulations, you won!!!' : 'Im sorry, you lost.')
+          winner = true
+          player === user ? youCount++ : machineCount++
+          return
+        }
+      }
 
     if(game.length == 0 && !winner && !draw) {
         alert('It is a draw.')
