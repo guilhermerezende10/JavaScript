@@ -11,3 +11,7 @@ console.log(balance)
 let balance2 = 0
 for(const cur of movements) balance2 += cur
 console.log(balance2)
+
+const max = movements.reduce((acc, mov) => acc > mov ? acc : mov, movements[0])
+
+console.log(max)
