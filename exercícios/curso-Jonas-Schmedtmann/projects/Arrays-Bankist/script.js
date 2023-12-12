@@ -82,9 +82,9 @@ const displayMovements = function(movements) {
     })
 }
 
-const calcDisplayBalance = function(movements) {
-  const balance = movements.reduce((acc, mov) => acc + mov , 0)
-  labelBalance.textContent = `${balance}€`
+const calcDisplayBalance = function(acc) {
+  acc.balance = acc.movements.reduce((acc, mov) => acc + mov , 0)
+  labelBalance.textContent = `${acc.balance}€`
 }
 
 const calcDisplaySummary = function(acc) {
@@ -98,7 +98,7 @@ const calcDisplaySummary = function(acc) {
   .map(deposit => deposit * currentAccount.interestRate / 100)
   .filter(deposit => deposit >= 1)
   .reduce((acc, cur) => acc += cur, 0)
-  labelSumInterest.textContent = `${interest}€`
+  labelSumInterest.textContent = `${interest.toFixed(1)}€`
 }
 
 const createUsernames = function(accs) {
@@ -109,13 +109,21 @@ const createUsernames = function(accs) {
 
 createUsernames(accounts)
 
+function updateUI(acc) {
+    // Display movements
+    displayMovements(acc.movements)
+    // Display balance
+    calcDisplayBalance(acc)
+    //Display summary
+    calcDisplaySummary(acc)
+}
+
 // event handler
 let currentAccount; 
 
 btnLogin.addEventListener('click', function(e) {
   e.preventDefault() // PREVENT FORM FROM SUBMITING
   currentAccount = accounts.find(acc => acc.username === inputLoginUsername.value)
-  console.log(currentAccount)
 
   if(currentAccount?.pin === Number(inputLoginPin.value)) {
     // Display UI and WELCOME message
@@ -126,13 +134,22 @@ btnLogin.addEventListener('click', function(e) {
     // Clear input fields 
     inputLoginUsername.value = inputLoginPin.value = '' 
     inputLoginPin.blur()
+    updateUI(currentAccount)
+  }
+})
 
-    // Display movements
-    displayMovements(currentAccount.movements)
-    // Display balance
-    calcDisplayBalance(currentAccount.movements)
-    //Display summary
-    calcDisplaySummary(currentAccount)
+btnTransfer.addEventListener('click', function(e) {
+  e.preventDefault()
+  const amount = Number(inputTransferAmount.value)
+  const receiverAcc = accounts.find(acc => acc.username === inputTransferTo.value)
+
+  inputTransferAmount.value = inputTransferTo.value = ''
+
+  if (amount > 0 && amount <= currentAccount.balance && receiverAcc && receiverAcc?.username !== currentAccount.username) {
+    currentAccount.movements.push(-amount)
+    receiverAcc.movements.push(amount)
+    updateUI(currentAccount)
+
   }
 })
 
