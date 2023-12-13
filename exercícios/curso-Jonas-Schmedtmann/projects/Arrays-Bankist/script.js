@@ -136,6 +136,10 @@ btnLogin.addEventListener('click', function(e) {
     inputLoginPin.blur()
     updateUI(currentAccount)
   }
+
+  else {
+    alert('There\'\s no account with this username or password. Try again')
+  }
 })
 
 btnTransfer.addEventListener('click', function(e) {
@@ -180,6 +184,9 @@ btnClose.addEventListener('click', function(e){
 
     // Hide UI
     containerApp.style.opacity = 0
+
+    // taking out the welcome message
+    labelWelcome.textContent = `Log in to get started`
   }
   inputCloseUsername.value = inputClosePin.value = ''
 })
