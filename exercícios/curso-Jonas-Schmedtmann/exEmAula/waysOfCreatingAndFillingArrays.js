@@ -20,3 +20,5 @@ const z = Array.from({length: 7}, (_, i) => i + 1)
 console.log(z)
 
 const movementsUI = Array.from(document.querySelectorAll('.movements__value')).map(el => Number(el.textContent.replace('€', ' ')))
+
+const movementsUI2 = [...document.querySelectorAll('.movements__value')]
