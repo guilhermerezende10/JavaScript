@@ -4,10 +4,14 @@
 /////////////////////////////////////////////////
 // BANKIST APP
 
+/////////////////////////////////////////////////
 // Data
+
+// DIFFERENT DATA! Contains movement dates, currency and locale
+
 const account1 = {
   owner: 'Jonas Schmedtmann',
-  movements: [200, 450, -400, 3000, -650, -130, 70, 1300],
+  movements: [200, 455.23, -306.5, 25000, -642.21, -133.9, 79.97, 1300],
   interestRate: 1.2, // %
   pin: 1111,
   movementsDates: [
@@ -64,7 +68,7 @@ const account3 = {
 
 const account4 = {
   owner: 'Sarah Smith',
-  movements: [430, 1000, 700, 50, 90],
+  movements: [430, 1000, 700, 50, 90, 3420, 4170, -1420],
   interestRate: 1,
   pin: 4444,
   movementsDates: [
@@ -83,7 +87,7 @@ const account4 = {
 
 const account5 = {
   owner: 'Guilherme Rezende',
-  movements: [3420, 4170, -1420, 4500, 1180, 12300, 870, -8400, 2270, 15420, -25000, 14000, 72000],
+  movements: [3420, 4170, -1420, 4500, 1180, 12300, 870, -3305],
   interestRate: 2,
   pin: 6407,
   movementsDates: [
@@ -264,58 +268,6 @@ btnSort.addEventListener('click', function(e) {
 /////////////////////////////////////////////////
 /////////////////////////////////////////////////
 // LECTURES
-
-const currencies = new Map([
-  ['USD', 'United States dollar'],
-  ['EUR', 'Euro'],
-  ['GBP', 'Pound sterling'],
-]);
-
-const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
-
-/////////////////////////////////////////////////
-
-labelBalance.addEventListener('click', function(){
-  const movementsUI = Array.from(document.querySelectorAll('.movements__value')).map(el => Number(el.textContent.replace('€', ' ')))
-  console.log(movementsUI)
-
-  const movementsUI2 = [...document.querySelectorAll('.movements__value')]
-})
-
-// 1.
-
-const bankDepositSum = accounts
-.flatMap(acc => acc.movements)
-.filter(mov => mov > 0)
-.reduce((sum, cur) => sum + cur, 0)
-console.log(bankDepositSum)
-
-// 2. 
-
-const numDeposits1000 = accounts.flatMap(acc => acc.movements).reduce((count, cur) => cur >= 1000 ? ++count : count, 0) // Prefixed ++ operator 
-console.log(numDeposits1000)
-
-// 3.
-
-const {deposits, withdrawals} = accounts.flatMap(acc => acc.movements).reduce((sums, cur) => {
-  // cur > 0 ? (sums.deposits += cur) : (sums.withdrawals += cur)
-  sums[cur > 0 ? 'deposits' : 'withdrawals'] += cur
-  return sums
-}, {deposits:0, withdrawals: 0}) 
-console.log(deposits, withdrawals)
-
-// 4.
-
-const convertTitleCase = function(title) {
-  const capitalize = str => str[0].toUpperCase() + str.slice(1)
-  const expections = ['a', 'an', 'and', 'the', 'but', 'or', 'on', 'in', 'with']
-  const titleCase = title.toLowerCase().split(' ').map(word =>  (expections.includes(word) ? word : capitalize(word))).join(' ')
-  return capitalize(titleCase)
-}
-
-console.log(convertTitleCase('this is a nice title'))
-console.log(convertTitleCase('this is a LONG title but not too long'))
-console.log(convertTitleCase('and here is another title with an EXAMPLE'))
 
 
 
