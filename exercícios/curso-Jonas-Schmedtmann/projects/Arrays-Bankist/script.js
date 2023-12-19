@@ -91,14 +91,14 @@ const account5 = {
   interestRate: 2,
   pin: 6407,
   movementsDates: [
-    "2019-11-01T13:15:33.035Z",
-    "2019-11-30T09:48:16.867Z",
-    "2019-12-25T06:04:23.907Z",
-    "2020-01-25T14:18:46.235Z",
-    "2020-02-05T16:33:06.386Z",
-    "2020-04-10T14:43:26.374Z",
-    "2020-06-25T18:49:59.371Z",
-    "2020-07-26T12:01:20.894Z",
+    "2022-10-01T13:15:33.035Z",
+    "2022-11-30T09:48:16.867Z",
+    "2022-12-25T06:04:23.907Z",
+    "2023-01-25T14:18:46.235Z",
+    "2023-02-05T16:33:06.386Z",
+    "2023-06-10T14:43:26.374Z",
+    "2023-10-25T18:49:59.371Z",
+    "2023-12-15T12:01:20.894Z",
   ],
   currency: "BRL",
   locale: "pt-BR",
@@ -132,18 +132,26 @@ const inputLoanAmount = document.querySelector(".form__input--loan-amount");
 const inputCloseUsername = document.querySelector(".form__input--user");
 const inputClosePin = document.querySelector(".form__input--pin");
 
-const displayMovements = function (movements, sort = false) {
+const displayMovements = function (acc, sort = false) {
   containerMovements.innerHTML = "";
 
-  const movs = sort ? movements.slice().sort((a, b) => a - b) : movements;
+  const movs = sort ? acc.movements.slice().sort((a, b) => a - b) : acc.movements;
 
   movs.forEach(function (mov, i) {
     const type = mov > 0 ? "deposit" : "withdrawal";
+
+  const date = new Date(acc.movementsDates[i])
+  const day = `${date.getDate()}`.padStart(2, '0')
+  const month = `${date.getMonth() + 1}`.padStart(2, '0')
+  const year = date.getFullYear()
+  const displayDate = `${day}/${month}/${year}`
+
     const html = `
         <div class="movements__row">
             <div class="movements__type movements__type--${type}">${
       i + 1
     } ${type}</div>
+            <div class="movements__date">${displayDate}</div>
             <div class="movements__value">${mov.toFixed(2)}€</div>
       </div>`;
 
@@ -189,7 +197,7 @@ createUsernames(accounts);
 
 function updateUI(acc) {
   // Display movements
-  displayMovements(acc.movements);
+  displayMovements(acc);
   // Display balance
   calcDisplayBalance(acc);
   //Display summary
@@ -198,6 +206,13 @@ function updateUI(acc) {
 
 // event handlers
 let currentAccount;
+
+// Fake always logged in
+currentAccount = account5;
+updateUI(currentAccount);
+containerApp.style.opacity = 100;
+
+// day/month/year
 
 btnLogin.addEventListener("click", function (e) {
   e.preventDefault(); // PREVENT FORM FROM SUBMITING
@@ -211,7 +226,17 @@ btnLogin.addEventListener("click", function (e) {
     labelWelcome.textContent = `Welcome back ${
       currentAccount.owner.split(" ")[0]
     }!`;
+
     containerApp.style.opacity = 100;
+
+    // Create current date
+    const now = new Date();
+    const day = `${now.getDate()}`.padStart(2, '0')
+    const month = `${now.getMonth() + 1}`.padStart(2, '0')
+    const year = now.getFullYear()
+    const hour = `${now.getHours()}`.padStart(2, '0')
+    const min = `${now.getMinutes() + 1}`.padStart(2, '0')
+    labelDate.textContent = `${day}/${month}/${year}, ${hour}:${min}`
 
     // Clear input fields
     inputLoginUsername.value = inputLoginPin.value = "";
@@ -239,6 +264,11 @@ btnTransfer.addEventListener("click", function (e) {
   ) {
     currentAccount.movements.push(-amount);
     receiverAcc.movements.push(amount);
+
+    // Add transfer date
+    currentAccount.movementsDates.push(new Date().toISOString())
+    receiverAcc.movementsDates.push(new Date().toISOString())
+
     updateUI(currentAccount);
   }
 });
@@ -254,6 +284,9 @@ btnLoan.addEventListener("click", function (e) {
   ) {
     // Add movement
     currentAccount.movements.push(amount);
+
+    // Add date
+    currentAccount.movementsDates.push(new Date().toISOString())
 
     // Update UI
     updateUI(currentAccount);
@@ -285,13 +318,13 @@ btnClose.addEventListener("click", function (e) {
 });
 
 let sorted = false;
+
 btnSort.addEventListener("click", function (e) {
   e.preventDefault();
-  displayMovements(currentAccount.movements, !sorted);
+  displayMovements(currentAccount, !sorted);
   sorted = !sorted;
 });
 
 /////////////////////////////////////////////////
 /////////////////////////////////////////////////
 // LECTURES
-
