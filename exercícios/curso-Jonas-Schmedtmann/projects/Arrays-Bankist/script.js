@@ -251,9 +251,6 @@ btnLogin.addEventListener("click", function (e) {
     const min = `${now.getMinutes() + 1}`.padStart(2, "0");
     labelDate.textContent = `${day}/${month}/${year}, ${hour}:${min}`;
 
-    const calcDaysPassed = (date1, date2) =>
-      Math.round(Math.abs(date2 - date1) / (1000 * 60 * 60 * 24));
-
     // Clear input fields
     inputLoginUsername.value = inputLoginPin.value = "";
     inputLoginPin.blur();
