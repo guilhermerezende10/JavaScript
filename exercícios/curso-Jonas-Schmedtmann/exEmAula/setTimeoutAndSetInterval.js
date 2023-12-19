@@ -1,3 +1,5 @@
+
+// Set interval
 const ingredients = ["olives", "spinach"];
 
 const pizzaTimer = setTimeout(
@@ -9,3 +11,17 @@ const pizzaTimer = setTimeout(
 console.log("Wainting...");
 
 if (ingredients.includes("spinach")) clearTimeout(pizzaTimer);
+
+// Set interval
+setInterval(() => {
+    const now = new Date()
+    const hour = now.getHours()
+    const min = now.getMinutes()
+    const sec = now.getSeconds()
+    console.log(`${hour}:${min}:${sec}`)
+}, 1000)
+
+
+
+
+
