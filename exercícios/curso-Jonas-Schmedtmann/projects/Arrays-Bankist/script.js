@@ -141,15 +141,15 @@ const formatMovementDate = function (date, locale) {
   if (daysPassed === 1) return "Yesterday";
   if (daysPassed <= 7) return `${daysPassed} days ago`;
 
-  return new Intl.DateTimeFormat(locale).format(date)
+  return new Intl.DateTimeFormat(locale).format(date);
 };
 
-const formatCur = function(value, locale, currency) {
+const formatCur = function (value, locale, currency) {
   return new Intl.NumberFormat(locale, {
-    style: 'currency',
-    currency: currency
-  }).format(value)
-}
+    style: "currency",
+    currency: currency,
+  }).format(value);
+};
 
 const displayMovements = function (acc, sort = false) {
   containerMovements.innerHTML = "";
@@ -164,7 +164,7 @@ const displayMovements = function (acc, sort = false) {
     const date = new Date(acc.movementsDates[i]);
     const displayDate = formatMovementDate(date, acc.locale);
 
-    const formattedMov = formatCur(mov, acc.locale, acc.currency)
+    const formattedMov = formatCur(mov, acc.locale, acc.currency);
 
     const html = `
         <div class="movements__row">
@@ -181,18 +181,18 @@ const displayMovements = function (acc, sort = false) {
 
 const calcDisplayBalance = function (acc) {
   acc.balance = acc.movements.reduce((acc, mov) => acc + mov, 0);
-  labelBalance.textContent = formatCur(acc.balance, acc.locale, acc.currency)
+  labelBalance.textContent = formatCur(acc.balance, acc.locale, acc.currency);
 };
 
 const calcDisplaySummary = function (acc) {
   const inComes = acc.movements
     .filter((mov) => mov > 0)
     .reduce((acc, mov) => (acc += mov), 0);
-  labelSumIn.textContent = formatCur(inComes, acc.locale, acc.currency)
+  labelSumIn.textContent = formatCur(inComes, acc.locale, acc.currency);
 
-  const outComes = Math.abs(acc.movements
-    .filter((mov) => mov < 0)
-    .reduce((acc, mov) => (acc += mov), 0));
+  const outComes = Math.abs(
+    acc.movements.filter((mov) => mov < 0).reduce((acc, mov) => (acc += mov), 0)
+  );
   labelSumOut.textContent = formatCur(outComes, acc.locale, acc.currency);
 
   const interest = acc.movements
@@ -224,13 +224,38 @@ function updateUI(acc) {
   calcDisplaySummary(acc);
 }
 
+const startLogOutTimer = function () {
+  const tick = function () {
+    const min = String(Math.trunc(time / 60)).padStart(2, 0);
+    const sec = String(Math.trunc(time % 60)).padStart(2, 0);
+    // in each call print the remaining timer to UI
+    labelTimer.textContent = `${min}:${sec}`;
+
+    // When 0 sec, stop timer and log out user
+    if (time === 0) {
+      clearInterval(timer);
+      labelWelcome.textContent = " Log in to get started";
+      containerApp.style.opacity = 0;
+    }
+    // Decrease 1s
+    time--;
+  };
+  // set time to 5 min
+  let time = 5 * 60;
+  // Call the timer ever second
+  tick();
+  const timer = setInterval(tick, 1000);
+
+  return timer;
+};
+
 // event handlers
-let currentAccount;
+let currentAccount, timer;
 
 // Fake always logged in
-currentAccount = account5;
-updateUI(currentAccount);
-containerApp.style.opacity = 100;
+// currentAccount = account5;
+// updateUI(currentAccount);
+// containerApp.style.opacity = 100;
 
 btnLogin.addEventListener("click", function (e) {
   e.preventDefault(); // PREVENT FORM FROM SUBMITING
@@ -268,6 +293,11 @@ btnLogin.addEventListener("click", function (e) {
     // Clear input fields
     inputLoginUsername.value = inputLoginPin.value = "";
     inputLoginPin.blur();
+
+    // Timer
+    if(timer) clearInterval(timer)
+    timer = startLogOutTimer();
+
     updateUI(currentAccount);
   } else {
     alert("There's no account with this username or password. Try again");
@@ -296,7 +326,12 @@ btnTransfer.addEventListener("click", function (e) {
     currentAccount.movementsDates.push(new Date().toISOString());
     receiverAcc.movementsDates.push(new Date().toISOString());
 
+    // update UI
     updateUI(currentAccount);
+
+    // reset timer
+    clearInterval(timer)
+    timer = startLogOutTimer();
   }
 });
 
@@ -309,15 +344,20 @@ btnLoan.addEventListener("click", function (e) {
     amount > 0 &&
     currentAccount.movements.some((mov) => mov >= amount * 0.1)
   ) {
-    setTimeout(function(){// Add movement
-    currentAccount.movements.push(amount);
+    setTimeout(function () {
+      // Add movement
+      currentAccount.movements.push(amount);
 
-    // Add date
-    currentAccount.movementsDates.push(new Date().toISOString());
+      // Add date
+      currentAccount.movementsDates.push(new Date().toISOString());
 
-    // Update UI
-    updateUI(currentAccount);
-  }, 2500)}
+      // Update UI
+      updateUI(currentAccount);
+      // reset timer
+      clearInterval(timer)
+      timer = startLogOutTimer();
+    }, 2500);
+  }
   inputLoanAmount.value = "";
 });
 
@@ -355,4 +395,3 @@ btnSort.addEventListener("click", function (e) {
 /////////////////////////////////////////////////
 /////////////////////////////////////////////////
 // LECTURES
-
