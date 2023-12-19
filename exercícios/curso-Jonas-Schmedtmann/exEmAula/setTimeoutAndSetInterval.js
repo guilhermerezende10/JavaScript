@@ -15,9 +15,9 @@ if (ingredients.includes("spinach")) clearTimeout(pizzaTimer);
 // Set interval
 setInterval(() => {
     const now = new Date()
-    const hour = now.getHours()
-    const min = now.getMinutes()
-    const sec = now.getSeconds()
+    const hour = String(now.getHours()).padStart(2, 0)
+    const min = String(now.getMinutes()).padStart(2, 0)
+    const sec = String(now.getSeconds()).padStart(2, 0)
     console.log(`${hour}:${min}:${sec}`)
 }, 1000)
 
