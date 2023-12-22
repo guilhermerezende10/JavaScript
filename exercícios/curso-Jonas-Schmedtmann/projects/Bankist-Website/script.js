@@ -34,3 +34,14 @@ document.addEventListener('keydown', function (e) {
 ////////////////////////////////////////////////////
 ////////////////////////////////////////////////////
 
+const btnScrollTo = document.querySelector('.btn--scroll-to')
+const section1 = document.querySelector('#section--1')
+
+btnScrollTo.addEventListener('click', function(e) {
+  const s1coords = section1.getBoundingClientRect()
+   // scrolling
+
+  // window.scrollTo({left:s1coords.left + window.pageXOffset, top: s1coords.top + window.pageYOffset, behavior: 'smooth' }) // old way
+
+  section1.scrollIntoView({behavior:"smooth"}) // new way
+})
