@@ -108,7 +108,6 @@ nav.addEventListener('mouseout', function (e) {
 
 // sticky navigation 
 const initialCoords = section1.getBoundingClientRect()
-console.log(initialCoords)
 
 window.addEventListener('scroll', function(e) {
 
