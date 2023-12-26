@@ -149,7 +149,7 @@ const sectionObserver = new IntersectionObserver(revealSection, {
 
 allSections.forEach(function (section) {
   sectionObserver.observe(section);
-  section.classList.add('section--hidden');
+  // section.classList.add('section--hidden');
 });
 
 // Lazy loading images
@@ -173,6 +173,48 @@ const imgObserver = new IntersectionObserver(loadImg, {
   rootMargin: '200px'
 });
 imgTargets.forEach(img => imgObserver.observe(img));
+
+// Slider
+
+const slides = document.querySelectorAll('.slide')
+const slider = document.querySelector('.slider')
+const btnLeft = document.querySelector('.slider__btn--left')
+const btnRight = document.querySelector('.slider__btn--right')
+const dotContainer = document.querySelector('.dots')
+
+let curSlide = 0
+const maxSlide = slides.length - 1
+const minSlide = 0
+
+// const createDots = function() {
+//   slides.forEach()
+// }
+
+const goToSlide = function(slide) {
+  slides.forEach((s, i) => s.style.transform = `translateX(${(i - slide) * 100 }%)`)
+}
+
+goToSlide(0)
+
+// Next Slide
+const nextSlide =  function() {
+  curSlide === maxSlide ? curSlide = 0 :  curSlide++
+  goToSlide(curSlide)
+}
+btnRight.addEventListener('click', nextSlide)
+
+// Previous slide
+const previousSlide = function() {
+  curSlide === minSlide ? curSlide = maxSlide :  curSlide--
+  goToSlide(curSlide)
+}
+btnLeft.addEventListener('click', previousSlide)
+
+document.addEventListener('keydown', function(e) {
+  if (e.key === 'ArrowLeft') previousSlide()
+  else if (e.key === 'ArrowRight') nextSlide()
+} )
+
 
 ////////////////////////////////////////////////////
 ////////////////////////////////////////////////////
