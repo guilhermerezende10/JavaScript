@@ -176,44 +176,77 @@ imgTargets.forEach(img => imgObserver.observe(img));
 
 // Slider
 
-const slides = document.querySelectorAll('.slide')
-const slider = document.querySelector('.slider')
-const btnLeft = document.querySelector('.slider__btn--left')
-const btnRight = document.querySelector('.slider__btn--right')
-const dotContainer = document.querySelector('.dots')
+const slider = function() {
 
-let curSlide = 0
-const maxSlide = slides.length - 1
-const minSlide = 0
+  const slides = document.querySelectorAll('.slide')
+  const slider = document.querySelector('.slider')
+  const btnLeft = document.querySelector('.slider__btn--left')
+  const btnRight = document.querySelector('.slider__btn--right')
+  const dotContainer = document.querySelector('.dots')
+  const dots = dotContainer.querySelectorAll('.dots__dot')
 
-// const createDots = function() {
-//   slides.forEach()
-// }
+  let curSlide = 0
+  const maxSlide = slides.length - 1
+  const minSlide = 0
 
-const goToSlide = function(slide) {
-  slides.forEach((s, i) => s.style.transform = `translateX(${(i - slide) * 100 }%)`)
+  // Functions
+  const createDots = function() {
+    slides.forEach((_, i) => {
+      dotContainer.insertAdjacentHTML('beforeend', `<button class="dots__dot" data-slide="${i}"></button>`)
+    })
+  }
+
+  const activeDot = function(slide) {
+    dotContainer.querySelectorAll('.dots__dot').forEach(dot => dot.classList.remove('dots__dot--active'))
+    document.querySelector(`.dots__dot[data-slide="${slide}"]`).classList.add('dots__dot--active') 
+  }
+
+  const goToSlide = function(slide) {
+    slides.forEach((s, i) => s.style.transform = `translateX(${(i - slide) * 100 }%)`)
+  }
+  
+  // Initializating starter functions
+  const init = function() {
+    createDots()
+    goToSlide(0)
+    activeDot(0)
+  }
+  init()
+
+  // Next Slide
+  const nextSlide =  function() {
+    curSlide === maxSlide ? curSlide = 0 :  curSlide++
+    goToSlide(curSlide)
+    activeDot(curSlide)
+  }
+
+  // Previous slide
+  const previousSlide = function() {
+    curSlide === minSlide ? curSlide = maxSlide :  curSlide--
+    goToSlide(curSlide)
+    activeDot(curSlide)
+  }
+
+  // Handlers
+  btnRight.addEventListener('click', nextSlide)
+  btnLeft.addEventListener('click', previousSlide)
+
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'ArrowLeft') previousSlide()
+    else if (e.key === 'ArrowRight') nextSlide()
+  } )
+
+
+  dotContainer.addEventListener('click', function(e) {
+    if (e.target.classList.contains('dots__dot')) {
+      const slide = e.target.dataset.slide
+      goToSlide(slide)
+      activeDot(slide)
+    }
+  })
 }
 
-goToSlide(0)
-
-// Next Slide
-const nextSlide =  function() {
-  curSlide === maxSlide ? curSlide = 0 :  curSlide++
-  goToSlide(curSlide)
-}
-btnRight.addEventListener('click', nextSlide)
-
-// Previous slide
-const previousSlide = function() {
-  curSlide === minSlide ? curSlide = maxSlide :  curSlide--
-  goToSlide(curSlide)
-}
-btnLeft.addEventListener('click', previousSlide)
-
-document.addEventListener('keydown', function(e) {
-  if (e.key === 'ArrowLeft') previousSlide()
-  else if (e.key === 'ArrowRight') nextSlide()
-} )
+slider()
 
 
 ////////////////////////////////////////////////////
