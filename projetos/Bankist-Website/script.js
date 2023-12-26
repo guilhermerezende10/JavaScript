@@ -137,6 +137,8 @@ headerObserver.observe(header);
 // Reveal sections
 const allSections = document.querySelectorAll('.section');
 
+allSections.forEach(sec => sec.classList.add('section--hidden'));
+
 const revealSection = function (entries, observer) {
   const [entry] = entries;
   if (!entry.isIntersecting) return;
@@ -260,4 +262,3 @@ slider();
 ////////////////////////////////////////////////////
 ////////////////////////////////////////////////////
 ////////////////////////////////////////////////////
-
