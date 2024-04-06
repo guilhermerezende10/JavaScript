@@ -26,7 +26,6 @@ console.log(jack);
 
 console.log(guilherme instanceof Person);
 
-
 // Prototypes
 
 Person.prototype.calcAge = function () {
@@ -112,11 +111,10 @@ class PersonCl {
   get fullName() {
     return this._fullName;
   }
-  static hey = function() {
-    console.log('Hey there')
-    console.log(this)
-}
-
+  static hey = function () {
+    console.log('Hey there');
+    console.log(this);
+  };
 }
 
 const jessica = new PersonCl('Jessica Davis', 1996);
@@ -133,10 +131,10 @@ jessica.greet();
 // 2. Classes are first-class citizens
 // 3. Classes are executed in strict mode
 
-const walter = new PersonCl('Walter White', 1965)
-walter.greet()
+const walter = new PersonCl('Walter White', 1965);
+walter.greet();
 
-PersonCl.hey()
+PersonCl.hey();
 
 const account = {
   owner: 'jonas',
@@ -156,3 +154,25 @@ console.log(account.latest);
 account.latest = 5000;
 
 console.log(account.movements);
+
+const PersonProto = {
+  calcAge() {
+    console.log(2024 - this.birthYear);
+  },
+
+  init(firstName, birthYear) {
+    this.firstName = firstName;
+    this.birthYear = birthYear;
+  },
+};
+
+const steven = Object.create(PersonProto);
+steven.name = 'Steven';
+steven.birthYear = 2002;
+steven.calcAge();
+
+console.log(steven.__proto__);
+
+const sarah = Object.create(PersonProto);
+sarah.init('Sarah', 2008);
+sarah.calcAge();
