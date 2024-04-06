@@ -74,3 +74,41 @@ console.log(arr.unique())
 const h1 = document.querySelector('h1');
 console.dir(x => x + 1)
 
+// Class expression
+
+// const PersonCl = class {
+
+// }
+
+
+// Class declaration
+
+class PersonCl {
+    constructor(firstName, birthYear) {
+        this.firstName = firstName
+        this.birthYear = birthYear
+    }
+
+
+    // Methods will be added to the .prototype property
+    calcAge() {
+        console.log(2024 - this.birthYear)
+    }
+
+    greet() {
+        console.log(`Hey ${this.firstName}`)
+    }
+}
+
+const jessica = new PersonCl('Jessica', 1996)
+
+console.log(jessica)
+jessica.calcAge()
+
+console.log(jessica.__proto__ === PersonCl.prototype) // true
+
+jessica.greet()
+
+// 1. Classes are NOT hoisted
+// 2. Classes are first-class citizens
+// 3. Classes are executed in strict mode
