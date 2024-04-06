@@ -50,3 +50,27 @@ console.log(guilherme.species)
 
 console.log(guilherme.hasOwnProperty('firstName')) // true
 console.log(guilherme.hasOwnProperty('species')) // false
+
+console.log(guilherme.__proto__)
+// Object.prototype (top of prototype chain)
+console.log(guilherme.__proto__.__proto__)
+console.log(guilherme.__proto__.__proto__.__proto__)
+
+console.dir(Person.prototype.constructor)
+
+const arr = [3,4,9,6,7,8,9,3,34]
+console.log(arr.__proto__)
+console.log(arr.__proto__ === Array.prototype) // true
+
+console.log(arr.__proto__.__proto__)
+console.log(arr)
+
+Array.prototype.unique = function() {
+    return [...new Set(this)]
+}
+
+console.log(arr.unique())
+
+const h1 = document.querySelector('h1');
+console.dir(x => x + 1)
+
