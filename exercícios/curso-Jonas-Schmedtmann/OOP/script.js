@@ -26,6 +26,7 @@ console.log(jack);
 
 console.log(guilherme instanceof Person);
 
+
 // Prototypes
 
 Person.prototype.calcAge = function () {
@@ -88,6 +89,7 @@ class PersonCl {
     this.birthYear = birthYear;
   }
 
+  // Instance methods
   // Methods will be added to the .prototype property
   calcAge() {
     console.log(2024 - this.birthYear);
@@ -110,6 +112,11 @@ class PersonCl {
   get fullName() {
     return this._fullName;
   }
+  static hey = function() {
+    console.log('Hey there')
+    console.log(this)
+}
+
 }
 
 const jessica = new PersonCl('Jessica Davis', 1996);
@@ -128,6 +135,8 @@ jessica.greet();
 
 const walter = new PersonCl('Walter White', 1965)
 walter.greet()
+
+PersonCl.hey()
 
 const account = {
   owner: 'jonas',
