@@ -266,32 +266,71 @@
 // martha.calcAge()
 
 
-const PersonProto = {
-  calcAge() {
-    console.log(2024 - this.birthYear);
-  },
+// const PersonProto = {
+//   calcAge() {
+//     console.log(2024 - this.birthYear);
+//   },
 
-  init(firstName, birthYear) {
-    this.firstName = firstName;
-    this.birthYear = birthYear;
-  },
-};
+//   init(firstName, birthYear) {
+//     this.firstName = firstName;
+//     this.birthYear = birthYear;
+//   },
+// };
 
-const steven = Object.create(PersonProto);
+// const steven = Object.create(PersonProto);
 
-StudentProto = Object.create(PersonProto)
+// StudentProto = Object.create(PersonProto)
 
-StudentProto.init = function(firstName, birthYear, course) {
-  PersonProto.init.call(this, firstName, birthYear)
-  this.course = course;
+// StudentProto.init = function(firstName, birthYear, course) {
+//   PersonProto.init.call(this, firstName, birthYear)
+//   this.course = course;
+// }
+
+// StudentProto.introduce = function () {
+//     console.log(`My name is ${this.firstName} and my course is ${this.course}`);
+//   };
+  
+// const jay = Object.create(StudentProto)
+
+// jay.init('Jay Garrick', 2000, 'Computer Science')
+// jay.calcAge()
+// jay.introduce()
+
+class Account {
+  constructor(owner, currency, pin) {
+    this.owner = owner
+    this.currency = currency
+    this.pin = pin
+    this.movements = []
+    this.locale = navigator.language
+
+    console.log(`Thanks for opening an account!`)
+  }
+
+  // Public Interface
+  deposit(val) {
+    this.movements.push(val)
+  }
+
+  withdraw(val) {
+    this.deposit(-val)
+  }
+
+  approveLoan(val) {
+    return true;
+  }
+
+  requestLoan(val) {
+    if(this.approveLoan(val)) {
+      this.deposit(val)
+      console.log(`Loan approved!`)
+    }
+  }
 }
 
-StudentProto.introduce = function () {
-    console.log(`My name is ${this.firstName} and my course is ${this.course}`);
-  };
-  
-const jay = Object.create(StudentProto)
+const acc1 = new Account('Guilherme', 'BRL', 6407)
+console.log(acc1)
 
-jay.init('Jay Garrick', 2000, 'Computer Science')
-jay.calcAge()
-jay.introduce()
+acc1.deposit(200)
+acc1.withdraw(250)
+acc1.requestLoan(10000)
