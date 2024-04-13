@@ -206,9 +206,6 @@
 // Student.prototype.constructor = Student;
 // console.dir(Student.prototype.constructor);
 
-
-
-
 // class PersonCl {
 //   constructor(fullName, birthYear) {
 //     this.fullName = fullName;
@@ -265,7 +262,6 @@
 // martha.introduce()
 // martha.calcAge()
 
-
 // const PersonProto = {
 //   calcAge() {
 //     console.log(2024 - this.birthYear);
@@ -289,56 +285,79 @@
 // StudentProto.introduce = function () {
 //     console.log(`My name is ${this.firstName} and my course is ${this.course}`);
 //   };
-  
+
 // const jay = Object.create(StudentProto)
 
 // jay.init('Jay Garrick', 2000, 'Computer Science')
 // jay.calcAge()
 // jay.introduce()
 
-class Account {
-  constructor(owner, currency, pin) {
-    this.owner = owner
-    this.currency = currency
-    this._pin = pin
-    // protected property
-    this._movements = []
-    this.locale = navigator.language
+// 1) Public Fields
+// 2) Private Fields
+// 3) Public Methods
+// 4) Privete Methods
+// There's also a static version
 
-    console.log(`Thanks for opening an account!`)
+class Account {
+  // 1) Public Field (instances)
+  locale = navigator.language;
+
+  // 2) Private fields
+  #movements = [];
+  #pin;
+
+  constructor(owner, currency, pin) {
+    this.owner = owner;
+    this.currency = currency;
+    this.#pin = pin;
+    // protected property
+    this._movements = [];
+    this.locale = navigator.language;
+
+    console.log(`Thanks for opening an account!`);
   }
+
+
+  // 3) Public Methods
 
   // Public Interface
 
   getMovements() {
-    return this._movements
+    return this.#movements;
   }
 
   deposit(val) {
-    this._movements.push(val)
+    this.#movements.push(val);
   }
 
   withdraw(val) {
-    this.deposit(-val)
-  }
-
-  approveLoan(val) {
-    return true;
+    this.deposit(-val);
   }
 
   requestLoan(val) {
-    if(this.approveLoan(val)) {
-      this.deposit(val)
-      console.log(`Loan approved!`)
+    if (this._approveLoan(val)) {
+      this.deposit(val);
+      console.log(`Loan approved!`);
     }
   }
+
+  static helper() {
+    console.log('helper')
+  }
+
+  // 4) Private Methods
+  _approveLoan(val) {
+    return true;
+  }
+
 }
 
-const acc1 = new Account('Guilherme', 'BRL', 6407)
-console.log(acc1)
+const acc1 = new Account('Guilherme', 'BRL', 6407);
+console.log(acc1);
 
-acc1.deposit(200)
-acc1.withdraw(250)
-acc1.requestLoan(10000)
+acc1.deposit(200);
+acc1.withdraw(250);
+acc1.requestLoan(10000);
 
-console.log(acc1.getMovements())
+console.log(acc1.getMovements());
+Account.helper()
