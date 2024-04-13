@@ -317,7 +317,6 @@ class Account {
     console.log(`Thanks for opening an account!`);
   }
 
-
   // 3) Public Methods
 
   // Public Interface
@@ -328,10 +327,12 @@ class Account {
 
   deposit(val) {
     this.#movements.push(val);
+    return this;
   }
 
   withdraw(val) {
     this.deposit(-val);
+    return this;
   }
 
   requestLoan(val) {
@@ -339,17 +340,18 @@ class Account {
       this.deposit(val);
       console.log(`Loan approved!`);
     }
+    return this;
   }
 
   static helper() {
-    console.log('helper')
+    console.log('helper');
+    return this;
   }
 
   // 4) Private Methods
   _approveLoan(val) {
     return true;
   }
-
 }
 
 const acc1 = new Account('Guilherme', 'BRL', 6407);
@@ -359,5 +361,8 @@ acc1.deposit(200);
 acc1.withdraw(250);
 acc1.requestLoan(10000);
 
-console.log(acc1.getMovements());
-Account.helper()
+// console.log(acc1.getMovements());
+// Account.helper()
+
+// Chaining
+acc1.deposit(300).deposit(500).withdraw(200).requestLoan(10000); // needs that the methods returns itself by returning this
