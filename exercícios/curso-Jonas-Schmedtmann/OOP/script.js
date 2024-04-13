@@ -300,16 +300,22 @@ class Account {
   constructor(owner, currency, pin) {
     this.owner = owner
     this.currency = currency
-    this.pin = pin
-    this.movements = []
+    this._pin = pin
+    // protected property
+    this._movements = []
     this.locale = navigator.language
 
     console.log(`Thanks for opening an account!`)
   }
 
   // Public Interface
+
+  getMovements() {
+    return this._movements
+  }
+
   deposit(val) {
-    this.movements.push(val)
+    this._movements.push(val)
   }
 
   withdraw(val) {
@@ -334,3 +340,5 @@ console.log(acc1)
 acc1.deposit(200)
 acc1.withdraw(250)
 acc1.requestLoan(10000)
+
+console.log(acc1.getMovements())
