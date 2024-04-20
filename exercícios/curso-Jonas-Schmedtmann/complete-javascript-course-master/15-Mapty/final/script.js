@@ -177,6 +177,8 @@ class App {
         return alert('Inputs have to be positive numbers!');
 
       workout = new Running([lat, lng], distance, duration, cadence);
+      console.log(workout)
+
     }
 
     // If workout cycling, create cycling object
