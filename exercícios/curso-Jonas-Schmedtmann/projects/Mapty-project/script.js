@@ -47,7 +47,11 @@ form.addEventListener('submit', function (e) {
 
   // Clear input fields
 
-  inputDistance.value = inputCadence.value = inputDuration.value = inputElevation.value = ''
+  inputDistance.value =
+    inputCadence.value =
+    inputDuration.value =
+    inputElevation.value =
+      '';
 
   // Display
   const { lat, lng } = mapEvent.latlng;
@@ -65,11 +69,9 @@ form.addEventListener('submit', function (e) {
     )
     .setPopupContent('Workout')
     .openPopup();
-
-
 });
 
-inputType.addEventListener('change', function() {
-  inputElevation.closest('.form__row').classList.toggle('form__row--hidden')
-  inputCadence.closest('.form__row').classList.toggle('form__row--hidden')
-})
+inputType.addEventListener('change', function () {
+  inputElevation.closest('.form__row').classList.toggle('form__row--hidden');
+  inputCadence.closest('.form__row').classList.toggle('form__row--hidden');
+});
