@@ -92,7 +92,7 @@ const getCountryAndNeighbour = function(country) {
     });
 }
 
-// getCountryAndNeighbour('andorra')
+getCountryAndNeighbour('germany')
 
 // setTimeout(() => {
 //     console.log('1 second passed')
@@ -107,7 +107,7 @@ const getCountryAndNeighbour = function(country) {
 //     }, 1000)
 // }, 1000)
 
-const request = fetch('https://restcountries.com/v3.1/name/brazil')
+// const request = fetch('https://restcountries.com/v3.1/name/brazil')
 
-console.log(request)
+// console.log(request)
 
