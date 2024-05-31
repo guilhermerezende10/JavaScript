@@ -151,7 +151,6 @@ const getCountryData = function (country) {
     'Country not found.'
   )
     .then(data => {
-      console.log(data)
       renderCountry(data[0]);
 
       const neighbour = data[0].borders;
@@ -167,8 +166,7 @@ const getCountryData = function (country) {
     .then(data => renderCountry(data[0], 'neighbour'))
     .catch(err => {
       console.log(err)
-      renderError(
-        `Something went wrong. ${err.message} Press F to pay respects.`
+      renderError(`${err.message}`
       );
     })
     .finally(() => {
@@ -177,7 +175,7 @@ const getCountryData = function (country) {
 };
 
 btn.addEventListener('click', function () {
-  getCountryData('australia');
+  getCountryData('brazil');
 });
 
 // getCountryData('usa');
