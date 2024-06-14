@@ -50,7 +50,7 @@ btnScrollTo.addEventListener('click', function (e) {
 //   })
 // })
 
-// 1. Add event listenere to a commom parent element
+// 1. Add event listener to a commom parent element
 // 2. Determine what element originated the event
 
 document.querySelector('.nav__links').addEventListener('click', function (e) {
