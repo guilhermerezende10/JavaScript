@@ -135,47 +135,47 @@ const renderCountry = function (data, classname = '') {
 //     })
 // };
 
-const getJSON = function (url, errorMsg = 'Somethin went wrong') {
-  return fetch(url).then(response => {
-    if (!response.ok) throw new Error(`${errorMsg} (${response.status})`);
+// const getJSON = function (url, errorMsg = 'Somethin went wrong') {
+//   return fetch(url).then(response => {
+//     if (!response.ok) throw new Error(`${errorMsg} (${response.status})`);
 
-    return response.json();
-  });
-};
+//     return response.json();
+//   });
+// };
 
-const getCountryData = function (country) {
-  // Country 1
+// const getCountryData = function (country) {
+//   // Country 1
 
-  getJSON(
-    `https://restcountries.com/v3.1/name/${country}`,
-    'Country not found.'
-  )
-    .then(data => {
-      renderCountry(data[0]);
+//   getJSON(
+//     `https://restcountries.com/v3.1/name/${country}`,
+//     'Country not found.'
+//   )
+//     .then(data => {
+//       renderCountry(data[0]);
 
-      const neighbour = data[0].borders;
+//       const neighbour = data[0].borders;
 
-      if (!neighbour) throw new Error('No neighbour found.');
+//       if (!neighbour) throw new Error('No neighbour found.');
 
-      // Country 2
-      return getJSON(
-        `https://restcountries.com/v3.1/alpha/${neighbour[0]}`,
-        'Country not found.'
-      );
-    })
-    .then(data => renderCountry(data[0], 'neighbour'))
-    .catch(err => {
-      console.log(err);
-      renderError(`${err.message}`);
-    })
-    .finally(() => {
-      countriesContainer.style.opacity = 1;
-    });
-};
+//       // Country 2
+//       return getJSON(
+//         `https://restcountries.com/v3.1/alpha/${neighbour[0]}`,
+//         'Country not found.'
+//       );
+//     })
+//     .then(data => renderCountry(data[0], 'neighbour'))
+//     .catch(err => {
+//       console.log(err);
+//       renderError(`${err.message}`);
+//     })
+//     .finally(() => {
+//       countriesContainer.style.opacity = 1;
+//     });
+// };
 
-btn.addEventListener('click', function () {
-  getCountryData('brazil');
-});
+// btn.addEventListener('click', function () {
+//   getCountryData('brazil');
+// });
 
 // getCountryData('usa');
 
@@ -192,19 +192,19 @@ btn.addEventListener('click', function () {
 
 // console.log('test end')
 
-const lotteryPromise = new Promise(function (resolve, reject) {
-  console.log('Lotter draw is happening 🔮');
+// const lotteryPromise = new Promise(function (resolve, reject) {
+//   console.log('Lotter draw is happening 🔮');
 
-  setTimeout(function () {
-    if (Math.random() >= 0.5) {
-      resolve('You WON 🤑');
-    } else {
-      reject(new Error('You lost your money 🏴‍☠️'));
-    }
-  }, 2000);
-});
+//   setTimeout(function () {
+//     if (Math.random() >= 0.5) {
+//       resolve('You WON 🤑');
+//     } else {
+//       reject(new Error('You lost your money 🏴‍☠️'));
+//     }
+//   }, 2000);
+// });
 
-lotteryPromise.then(res => console.log(res)).catch(err => console.error(err));
+// lotteryPromise.then(res => console.log(res)).catch(err => console.error(err));
 
 // Promisifying setTimeout
 
@@ -214,23 +214,23 @@ lotteryPromise.then(res => console.log(res)).catch(err => console.error(err));
 //   });
 // };
 
-const wait = seconds =>
-  new Promise(resolve => setTimeout(resolve, seconds * 1000));
+// const wait = seconds =>
+//   new Promise(resolve => setTimeout(resolve, seconds * 1000));
 
-wait(1)
-  .then(() => {
-    console.log('1 second passed');
-    return wait(1);
-  })
-  .then(() => {
-    console.log('2 seconds passed');
-    return wait(1);
-  })
-  .then(() => {
-    console.log('3 seconds passed');
-    return wait(1);
-  })
-  .then(() => console.log('4 seconds passed'));
+// wait(1)
+//   .then(() => {
+//     console.log('1 second passed');
+//     return wait(1);
+//   })
+//   .then(() => {
+//     console.log('2 seconds passed');
+//     return wait(1);
+//   })
+//   .then(() => {
+//     console.log('3 seconds passed');
+//     return wait(1);
+//   })
+//   .then(() => console.log('4 seconds passed'));
 
 // setTimeout(() => {
 //     console.log('1 second passed')
@@ -245,6 +245,59 @@ wait(1)
 //     }, 1000)
 // }, 1000)
 
-Promise.resolve('abcd').then(x => console.log(x))
-Promise.reject(new Error('Problem')).catch(x => console.error(x))
+// Promise.resolve('abcd').then(x => console.log(x))
+// Promise.reject(new Error('Problem')).catch(x => console.error(x))
 
+
+// navigator.geolocation.getCurrentPosition(
+//   position => console.log(position),
+//   err => console.error(err)
+// );
+
+
+const getPosition = function() {
+  return new Promise(function(resolve, reject) {
+    // navigator.geolocation.getCurrentPosition(
+    //   position => resolve(position),
+    //   err => reject(err)
+    // );
+    navigator.geolocation.getCurrentPosition(resolve, reject)
+  })
+}
+
+getPosition().then(pos => console.log(pos))
+
+const whereAmI = function (lat, lng) {
+  getPosition().then(pos => {
+    const {latitude: lat, longitude: lng} = pos.coords;
+    return fetch(`https://geocode.xyz/${lat},${lng}?geoit=json`)
+  })
+    .then((response) => {
+      if (!response.ok)
+        throw new Error(`Something went wrong. (${response.status})`);
+
+      return response.json();
+    })
+    .then((data) => {
+      console.log(`You are in ${data.city}, ${data.country}`);
+      return fetch(`https://restcountries.com/v3.1/name/${data.country}`);
+    })
+    .then((response) => {
+      if (!response.ok)
+        throw new Error(`Country not found (${response.status})`);
+
+      return response.json();
+    })
+    .then(data => {
+      // console.log(data)
+      renderCountry(data[0])
+    })
+    .catch((err) => {
+      console.log(err);
+      renderError(
+        `Something went wrong. ${err.message} Press F to pay respects.`
+      );
+    });
+};
+
+btn.addEventListener('click', whereAmI)
