@@ -311,24 +311,38 @@ const getPosition = function() {
 
 
 const whereAmI = async function(country) {
+  try {
   // Geolocation
   const pos = await getPosition();
   const {latitude: lat, longitude: lng} = pos.coords;
 
   // Reverse geocoding
   const resGeo = await fetch(`https://geocode.xyz/${lat},${lng}?geoit=json`)
+  if(!resGeo.ok) throw new Error('Problem with location data')
+
   const dataGeo = await resGeo.json();
   console.log(dataGeo)
 
   // Country Data
   // fetch(`https://restcountries.com/v3.1/name/${country}`).then(res => console.log(res)) // The same as below
   const res = await fetch(`https://restcountries.com/v3.1/name/${country}`) 
+  if(!res.ok) throw new Error('Problem getting country')
   // 'Await' will stop the execution until the promise is fulfilled
 
   const data = await res.json()
   console.log(data)
   renderCountry(data[0])
+  } catch(err){
+    console.log(`${err} 🇪🇸`)
+    renderError(`🚨${err.message}🚨`)
+  }
 }
 
-whereAmI('brazil')
+// whereAmI('brazil')
+whereAmI()
+// whereAmI()
+// whereAmI()
+// whereAmI()
+// whereAmI()
 console.log('FIRST')
+
