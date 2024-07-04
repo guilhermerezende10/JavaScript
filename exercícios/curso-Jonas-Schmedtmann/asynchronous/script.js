@@ -248,12 +248,10 @@ const renderCountry = function (data, classname = '') {
 // Promise.resolve('abcd').then(x => console.log(x))
 // Promise.reject(new Error('Problem')).catch(x => console.error(x))
 
-
 // navigator.geolocation.getCurrentPosition(
 //   position => console.log(position),
 //   err => console.error(err)
 // );
-
 
 // const getPosition = function() {
 //   return new Promise(function(resolve, reject) {
@@ -302,47 +300,58 @@ const renderCountry = function (data, classname = '') {
 
 // btn.addEventListener('click', whereAmI)
 
+const getPosition = function () {
+  return new Promise(function (resolve, reject) {
+    navigator.geolocation.getCurrentPosition(resolve, reject);
+  });
+};
 
-const getPosition = function() {
-  return new Promise(function(resolve, reject) {
-    navigator.geolocation.getCurrentPosition(resolve, reject)
-  })
-}
-
-
-const whereAmI = async function(country) {
+const whereAmI = async function () {
   try {
-  // Geolocation
-  const pos = await getPosition();
-  const {latitude: lat, longitude: lng} = pos.coords;
+    // Geolocation
+    const pos = await getPosition();
+    const { latitude: lat, longitude: lng } = pos.coords;
 
-  // Reverse geocoding
-  const resGeo = await fetch(`https://geocode.xyz/${lat},${lng}?geoit=json`)
-  if(!resGeo.ok) throw new Error('Problem with location data')
+    // Reverse geocoding
+    const resGeo = await fetch(`https://geocode.xyz/${lat},${lng}?geoit=json`);
+    if (!resGeo.ok) throw new Error('Problem with location data');
 
-  const dataGeo = await resGeo.json();
-  console.log(dataGeo)
+    const dataGeo = await resGeo.json();
 
-  // Country Data
-  // fetch(`https://restcountries.com/v3.1/name/${country}`).then(res => console.log(res)) // The same as below
-  const res = await fetch(`https://restcountries.com/v3.1/name/${country}`) 
-  if(!res.ok) throw new Error('Problem getting country')
-  // 'Await' will stop the execution until the promise is fulfilled
+    // Country Data
+    // fetch(`https://restcountries.com/v3.1/name/${country}`).then(res => console.log(res)) // The same as below
+    const res = await fetch(
+      `https://restcountries.com/v3.1/name/${dataGeo.country}`
+    );
+    if (!res.ok) throw new Error('Problem getting country');
+    // 'Await' will stop the execution until the promise is fulfilled
 
-  const data = await res.json()
-  console.log(data)
-  renderCountry(data[0])
-  } catch(err){
-    console.log(`${err} 🇪🇸`)
-    renderError(`🚨${err.message}🚨`)
+    const data = await res.json();
+    renderCountry(data[0]);
+    return `You are in ${dataGeo.city}, ${dataGeo.country}`;
+  } catch (err) {
+    console.log(`${err} 🇪🇸`);
+    renderError(`🚨${err.message}🚨`);
+
+    // reject promised returned from async function
+    throw err;
   }
-}
+};
 
-// whereAmI('brazil')
-whereAmI()
-// whereAmI()
-// whereAmI()
-// whereAmI()
-// whereAmI()
-console.log('FIRST')
+console.log('1: Will get location');
+// const city = whereAmI()
+// console.log(city)
+
+(async function () {
+  try {
+    const city = await whereAmI()
+    console.log(`2: ${city}`)
+  }
+  catch(err) {
+    console.error(`2: ${err.message}🔥`)
+  }
+  console.log('3: Finished getting location')
+
+})();
+
 
