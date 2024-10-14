@@ -71,5 +71,21 @@
 // console.log(ShoppingCart2)
 // console.log(ShoppingCart2.shippingCost)
 
+import cloneDeep from './node_modules/lodash-es/cloneDeep.js';
 
+const state = {
+    cart: [
+        {product:'bread', quantity: 5},
+        {product: 'pizza', quantity: 3}
+    ],
+    user: {loggedIn: true},
+}
+
+const stateClone = Object.assign({}, state)
+const stateDeepClone = cloneDeep(state)
+state.user.loggedIn = false;
+
+
+console.log(state, stateClone)
+console.log(stateDeepClone)
 
