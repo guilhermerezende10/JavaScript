@@ -71,3 +71,5 @@
 // console.log(ShoppingCart2)
 // console.log(ShoppingCart2.shippingCost)
 
+
+
