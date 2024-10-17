@@ -29,7 +29,6 @@ class RecipeView {
 
   #generateMarkup() {
     const fracty = require('fracty')
-    console.log(this.#data)
     return `<figure class="recipe__fig">
           <img src="${this.#data.image}" alt="${
       this.#data.title
