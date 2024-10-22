@@ -1,10 +1,6 @@
 import View from './View.js';
 import icons from 'url:../../img/icons.svg';
 
-if(module.hot) {
-    module.hot.accept();
-}
-
 class ResultsView extends View {
   _parentElement = document.querySelector('.results');
   _errorMessage = "No recipes found for your query. Please try again.";
